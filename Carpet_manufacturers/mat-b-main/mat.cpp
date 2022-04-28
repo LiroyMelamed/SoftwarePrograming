@@ -7,8 +7,8 @@ using namespace std;
 
 void create_mat(int a, int b, int c, int d, char char1, vector<vector<char>> &matrix)
 {
- int length_row = matrix.size();
- int length_col = matrix[a].size();
+ int length_row = (int)matrix.size();
+ int length_col = (int)matrix[a].size();
  // Stop conditions for recursion
  if (length_row / 2 < a || c > length_col / 2)
  {
