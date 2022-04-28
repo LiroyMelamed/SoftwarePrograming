@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-namespace ariel
+namespace zich
 {
  class Matrix
  {

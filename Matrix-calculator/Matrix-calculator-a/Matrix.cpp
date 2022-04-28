@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-namespace ariel
+namespace zich
 {
 
  Matrix::Matrix(const vector<double> &_mat, int _row, int _col)
