@@ -44,8 +44,8 @@ void Notebook::print(int page, int row_number, int column, ariel::Direction dire
    line = Notebook::notebook[page_number][i];
    if (line[col] != '_' || str[cnt] == '\n' || str[cnt] < ' ' || str[cnt] >= '~')
    {
-    throw invalid_argument("Cant write vertical");
-    flag = false;
+    throw invalid_argument("Cant write vertical")
+        flag = false;
     return;
    }
   }
@@ -71,7 +71,6 @@ string Notebook::print(int page, int row_number, int column, ariel::Direction di
  string word;
  // Number of rows to create if not available
  uint count_row = (direction == Direction::Vertical) ? length + 1 : 3;
-
  Notebook::create_lines(page_number, row, count_row);
  // A loop responsible for reading vertically
  for (uint i = row; direction == Direction::Vertical && i < row + length; i++)
