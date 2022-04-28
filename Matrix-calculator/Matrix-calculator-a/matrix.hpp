@@ -231,7 +231,7 @@ namespace ariel
    * @return True or error.
    */
 
-  bool valid_argument(int row, int col, vector<double> mat)
+  bool arg_check(int row, int col, vector<double> mat)
   {
 
    size = row * col;
@@ -251,7 +251,7 @@ namespace ariel
    * @return True or error.
    */
 
-  bool validsizeMatrix(Matrix mat, int mode) const
+  bool check_Matrix_size(Matrix mat, int mode) const
   {
    switch (mode)
    {
