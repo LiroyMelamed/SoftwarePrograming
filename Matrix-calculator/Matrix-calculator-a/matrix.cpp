@@ -1,5 +1,5 @@
 #include <iostream>
-#include "matrix.hpp"
+#include "Matrix.hpp"
 #include <vector>
 #include <string>
 using namespace std;
@@ -7,7 +7,7 @@ using namespace std;
 namespace ariel
 {
 
- matrix::matrix(const vector<double> &mat, int row, int col)
+ Matrix::Matrix(const vector<double> &mat, int row, int col)
  {
   valid_argument(row, col, mat);
   _col = col;
@@ -16,143 +16,143 @@ namespace ariel
   _size = row * col;
  }
 
- matrix matrix::operator+(const matrix &mat) const
+ Matrix Matrix::operator+(const Matrix &mat) const
  {
-  check_matrix_size(mat, 1);
+  check_Matrix_size(mat, 1);
   return *this;
  }
 
- matrix matrix::operator-(const matrix &mat) const
+ Matrix Matrix::operator-(const Matrix &mat) const
  {
-  check_matrix_size(mat, 1);
-
-  return *this;
- }
-
- matrix matrix::operator*(const matrix &mat) const
- {
-  check_matrix_size(mat, 2);
+  check_Matrix_size(mat, 1);
 
   return *this;
  }
 
- matrix matrix::operator*(double num) const
+ Matrix Matrix::operator*(const Matrix &mat) const
  {
+  check_Matrix_size(mat, 2);
 
   return *this;
  }
 
- matrix matrix::operator-()
- {
-  return *this;
- }
-
- matrix matrix::operator+()
- {
-  return *this;
- }
-
- matrix &matrix::operator++()
- {
-  return *this;
- }
-
- matrix matrix::operator++(int)
- {
-  return *this;
- }
-
- matrix &matrix::operator--()
- {
-  return *this;
- }
-
- matrix matrix::operator--(int)
- {
-  return *this;
- }
-
- matrix &matrix::operator+=(const matrix &mat)
- {
-  check_matrix_size(mat, 1);
-
-  return *this;
- }
-
- matrix &matrix::operator-=(const matrix &mat)
- {
-  check_matrix_size(mat, 1);
-
-  return *this;
- }
-
- matrix &matrix::operator*=(const matrix &mat)
- {
-  check_matrix_size(mat, 2);
-
-  return *this;
- }
-
- matrix &matrix::operator*=(double num)
+ Matrix Matrix::operator*(double num) const
  {
 
   return *this;
  }
 
- bool matrix::operator==(const matrix &mat) const
+ Matrix Matrix::operator-()
  {
-  check_matrix_size(mat, 1);
+  return *this;
+ }
+
+ Matrix Matrix::operator+()
+ {
+  return *this;
+ }
+
+ Matrix &Matrix::operator++()
+ {
+  return *this;
+ }
+
+ Matrix Matrix::operator++(int)
+ {
+  return *this;
+ }
+
+ Matrix &Matrix::operator--()
+ {
+  return *this;
+ }
+
+ Matrix Matrix::operator--(int)
+ {
+  return *this;
+ }
+
+ Matrix &Matrix::operator+=(const Matrix &mat)
+ {
+  check_Matrix_size(mat, 1);
+
+  return *this;
+ }
+
+ Matrix &Matrix::operator-=(const Matrix &mat)
+ {
+  check_Matrix_size(mat, 1);
+
+  return *this;
+ }
+
+ Matrix &Matrix::operator*=(const Matrix &mat)
+ {
+  check_Matrix_size(mat, 2);
+
+  return *this;
+ }
+
+ Matrix &Matrix::operator*=(double num)
+ {
+
+  return *this;
+ }
+
+ bool Matrix::operator==(const Matrix &mat) const
+ {
+  check_Matrix_size(mat, 1);
 
   return true;
  }
 
- bool matrix::operator!=(const matrix &mat) const
+ bool Matrix::operator!=(const Matrix &mat) const
  {
-  check_matrix_size(mat, 1);
+  check_Matrix_size(mat, 1);
 
   return true;
  }
 
- bool matrix::operator>=(const matrix &mat) const
+ bool Matrix::operator>=(const Matrix &mat) const
  {
-  check_matrix_size(mat, 1);
+  check_Matrix_size(mat, 1);
 
   return true;
  }
 
- bool matrix::operator<=(const matrix &mat) const
+ bool Matrix::operator<=(const Matrix &mat) const
  {
-  check_matrix_size(mat, 1);
+  check_Matrix_size(mat, 1);
 
   return true;
  }
 
- bool matrix::operator<(const matrix &mat) const
+ bool Matrix::operator<(const Matrix &mat) const
  {
-  check_matrix_size(mat, 1);
+  check_Matrix_size(mat, 1);
 
   return true;
  }
 
- bool matrix::operator>(const matrix &mat) const
+ bool Matrix::operator>(const Matrix &mat) const
  {
-  check_matrix_size(mat, 1);
+  check_Matrix_size(mat, 1);
 
   return true;
  }
 
- matrix operator*(int num, matrix mat)
+ Matrix operator*(int num, Matrix mat)
  {
 
   return mat;
  }
 
- std::istream &operator>>(std::istream &in, matrix &mat)
+ std::istream &operator>>(std::istream &in, Matrix &mat)
  {
   return in;
  }
 
- std::ostream &operator<<(std::ostream &out, const matrix &mat)
+ std::ostream &operator<<(std::ostream &out, const Matrix &mat)
  {
   return out;
  }

@@ -5,7 +5,7 @@ using namespace std;
 
 namespace ariel
 {
- class matrix
+ class Matrix
  {
  private:
   int row;
@@ -16,216 +16,216 @@ namespace ariel
  public:
   /**
    *
-   * @param mat The matrix
+   * @param mat The Matrix
    * @param row The row
    * @param column The columns
    *
    */
 
-  matrix(const vector<double> &mat, int row, int col);
+  Matrix(const vector<double> &mat, int row, int col);
 
   /**
    * operator +
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  matrix operator+(const matrix &mat) const;
+  Matrix operator+(const Matrix &mat) const;
 
   /**
    * operator -
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  matrix operator-(const matrix &mat) const;
+  Matrix operator-(const Matrix &mat) const;
 
   /**
    * operator *
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  matrix operator*(const matrix &mat) const;
+  Matrix operator*(const Matrix &mat) const;
 
   /**
    * operator *
    *
-   * @param num The number we want to double the matrix
-   * @return matrix.
+   * @param num The number we want to double the Matrix
+   * @return Matrix.
    */
 
-  matrix operator*(double num) const;
+  Matrix operator*(double num) const;
 
   /**
    * operator -
    * - unary
-   * @return matrix.
+   * @return Matrix.
    */
 
-  matrix operator-();
+  Matrix operator-();
 
   /**
    * operator +
    * + unary
-   * @return matrix.
+   * @return Matrix.
    */
 
-  matrix operator+();
+  Matrix operator+();
 
   /**
    * operator ++ (increment)
-   * @return matrix.
+   * @return Matrix.
    */
 
-  matrix &operator++();
+  Matrix &operator++();
 
   /**
    * operator ++
-   * @return matrix.
+   * @return Matrix.
    */
 
-  matrix operator++(int);
+  Matrix operator++(int);
 
   /**
    * operator -- (Decrement)
-   * @return matrix.
+   * @return Matrix.
    */
 
-  matrix &operator--();
+  Matrix &operator--();
 
   /**
    * operator --
-   * @return matrix.
+   * @return Matrix.
    */
 
-  matrix operator--(int);
+  Matrix operator--(int);
 
   /**
    * operator +=
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  matrix &operator+=(const matrix &mat);
+  Matrix &operator+=(const Matrix &mat);
 
   /**
    * operator -=
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  matrix &operator-=(const matrix &mat);
+  Matrix &operator-=(const Matrix &mat);
 
   /**
    * operator *=
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  matrix &operator*=(const matrix &mat);
+  Matrix &operator*=(const Matrix &mat);
 
   /**
    * operator *=
    *
-   * @param num The number we want to double the matrix
-   * @return matrix.
+   * @param num The number we want to double the Matrix
+   * @return Matrix.
    */
 
-  matrix &operator*=(double num);
+  Matrix &operator*=(double num);
 
   /**
    * operator ==
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  bool operator==(const matrix &mat) const;
+  bool operator==(const Matrix &mat) const;
 
   /**
    * operator !=
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  bool operator!=(const matrix &mat) const;
+  bool operator!=(const Matrix &mat) const;
 
   /**
    * operator >=
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  bool operator>=(const matrix &mat) const;
+  bool operator>=(const Matrix &mat) const;
 
   /**
    * operator <=
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  bool operator<=(const matrix &mat) const;
+  bool operator<=(const Matrix &mat) const;
 
   /**
    * operator <
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  bool operator<(const matrix &mat) const;
+  bool operator<(const Matrix &mat) const;
 
   /**
    * operator >
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  bool operator>(const matrix &mat) const;
+  bool operator>(const Matrix &mat) const;
 
   /**
    * operator *
    *
-   * @param mat The Vector expressing the matrix
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  friend matrix operator*(int num, matrix mat);
+  friend Matrix operator*(int num, Matrix mat);
 
   /**
    * operator *
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  friend std::istream &operator>>(std::istream &in, matrix &mat);
+  friend std::istream &operator>>(std::istream &in, Matrix &mat);
 
   /**
    * operator *
    *
-   * @param mat The Vector expressing the matrix
-   * @return matrix.
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
    */
 
-  friend std::ostream &operator<<(std::ostream &out, const matrix &mat);
+  friend std::ostream &operator<<(std::ostream &out, const Matrix &mat);
 
   /**
    * A function that checks the integrity of the input
    *
-   * @param mat The Vector expressing the matrix
+   * @param mat The Vector expressing the Matrix
    * @param row The rows
    * @param col The columns
    * @return True or error.
@@ -237,21 +237,21 @@ namespace ariel
    size = row * col;
    if (col < 1 || row < 1 || mat.size() != size)
    {
-    throw invalid_argument("matrix size < 0");
+    throw invalid_argument("Matrix size < 0");
    }
    return true;
   }
 
   /**
-   * A function is responsible for checking the integrity of the matrix dimension
+   * A function is responsible for checking the integrity of the Matrix dimension
    *
-   * @param mat The Vector expressing the matrix
+   * @param mat The Vector expressing the Matrix
    * @param mode Number representing the operations Account 1 for (+,-,==,!=, <=...) 2 to (*)
 
    * @return True or error.
    */
 
-  bool validsizematrix(matrix mat, int mode) const
+  bool validsizeMatrix(Matrix mat, int mode) const
   {
    switch (mode)
    {
@@ -259,13 +259,13 @@ namespace ariel
 
     if (mat.col != col || mat.row != row)
     {
-     throw invalid_argument("invalid matrix size for operator +");
+     throw invalid_argument("invalid Matrix size for operator +");
     }
     break;
    case 2:
     if (col != mat.row)
     {
-     throw invalid_argument("invalid matrix size for operator *");
+     throw invalid_argument("invalid Matrix size for operator *");
     }
     break;
    }
