@@ -19,70 +19,69 @@ namespace zich
  Matrix Matrix::operator+(const Matrix &_mat) const
  {
   check_Matrix_size(_mat, 1);
-  vector<double> temp((size_t)(_size));
-
-  for (size_t i = 0; i < _size; i++)
+  vector<double> temp((size_t)(size));
+  for (size_t i = 0; i < size; i++)
   {
-   temp[i] = _mat[i] + mat._mat[i];
+   temp[i] = mat[i] + _mat.mat[i];
   }
-  return Matrix(temp, _row, _col);
+  return Matrix(temp, row, col);
  }
 
  Matrix Matrix::operator-(const Matrix &_mat) const
  {
   check_Matrix_size(_mat, 1);
-  vector<double> temp((size_t)(_size));
-  for (size_t i = 0; i < _size; ++i)
+  vector<double> temp((size_t)(size));
+  for (size_t i = 0; i < size; ++i)
   {
-   temp[i] = _mat[i] - mat._mat[i];
+   temp[i] = mat[i] - _mat.mat[i];
   }
-  return Matrix(temp, _row, _col);
+  return Matrix(temp, row, col);
  }
 
  Matrix Matrix::operator*(const Matrix &_mat) const
  {
   check_Matrix_size(_mat, 2);
-  vector<double> temp((size_t)(_row * mat._col));
+  vector<double> temp((size_t)(row * _mat.col));
 
-  for (size_t i = 0; i < _row; ++i)
+  for (size_t i = 0; i < row; ++i)
   {
-   for (size_t j = 0; j < mat._col; ++j)
+   for (size_t j = 0; j < _mat.col; ++j)
    {
-    uint index = i * (size_t)mat._col + j;
+    uint index = i * (size_t)_mat.col + j;
     temp[index] = 0;
-    for (size_t k = 0; k < mat._row; ++k)
+    for (size_t k = 0; k < _mat.row; ++k)
     {
-     uint row = i * (size_t)_col + k;
-     uint col = k * (size_t)mat._col + j;
-     temp[index] += _mat[row] * mat._mat[col];
+     uint _row = i * (size_t)col + k;
+     uint _col = k * (size_t)_mat.col + j;
+     temp[index] += mat[row] * _mat.mat[col];
     }
    }
   }
-  return Matrix(temp, _row, mat._col);
+  return Matrix(temp, row, _mat.col);
  }
 
  Matrix Matrix::operator*(double num) const
  {
-  vector<double> temp((size_t)(_size));
-  for (size_t i = 0; i < _size; ++i)
+  vector<double> temp((size_t)(size));
+  for (size_t i = 0; i < size; ++i)
   {
-   temp[i] = _mat[i] * num;
+   temp[i] = mat[i] * num;
   }
-  return Matrix(temp, _row, _col);
+  return Matrix(temp, row, col);
  }
 
  Matrix Matrix::operator-()
  {
-  vector<double> temp((size_t)(_size));
-  for (size_t i = 0; i < _size; ++i)
+  vector<double> temp((size_t)(size));
+  for (size_t i = 0; i < size; ++i)
   {
-   if (_mat[i] == 0)
+   if (mat[i] == 0)
    {
     continue;
    }
-   temp[i] = _mat[i] * -1;
+   temp[i] = mat[i] * -1;
   }
-  return Matrix(temp, _row, _col)
+  return Matrix(temp, row, col)
  }
 
  Matrix Matrix::operator+()
@@ -92,9 +91,9 @@ namespace zich
 
  Matrix &Matrix::operator++()
  {
-  for (size_t i = 0; i < _size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
-   this->_mat[i]++;
+   this->mat[i]++;
   }
   return *this;
  }
@@ -102,18 +101,18 @@ namespace zich
  Matrix Matrix::operator++(int)
  {
   Matrix temp = *this;
-  for (size_t i = 0; i < _size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
-   ++this->_mat[i];
+   ++this->mat[i];
   }
   return temp;
  }
 
  Matrix &Matrix::operator--()
  {
-  for (size_t i = 0; i < _size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
-   this->_mat[i]--;
+   this->mat[i]--;
   }
   return *this;
  }
@@ -121,9 +120,9 @@ namespace zich
  Matrix Matrix::operator--(int)
  {
   Matrix temp = *this;
-  for (size_t i = 0; i < _size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
-   --this->_mat[i];
+   --this->mat[i];
   }
   return temp;
  }
@@ -131,9 +130,9 @@ namespace zich
  Matrix &Matrix::operator+=(const Matrix &_mat)
  {
   check_Matrix_size(_mat, 1);
-  for (size_t i = 0; i < _size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
-   _mat[i] += mat._mat[i];
+   mat[i] += _mat.mat[i];
   }
   return *this;
  }
@@ -151,19 +150,19 @@ namespace zich
  Matrix &Matrix::operator*=(const Matrix &_mat)
  {
   check_Matrix_size(_mat, 2);
-  *this = *this * mat;
+  *this = *this * _mat;
   return *this;
  }
 
  Matrix &Matrix::operator*=(double num)
  {
-  for (size_t i = 0; i < _size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
-   if (_mat[i] == 0)
+   if (mat[i] == 0)
    {
     continue;
    }
-   _mat[i] *= num;
+   mat[i] *= num;
   }
   return *this;
  }
@@ -171,9 +170,9 @@ namespace zich
  bool Matrix::operator==(const Matrix &_mat) const
  {
   check_Matrix_size(_mat, 1);
-  for (size_t i = 0; i < _size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
-   if (_mat[i] != mat._mat[i])
+   if (mat[i] != _mat.mat[i])
    {
     return false;
    }
@@ -184,9 +183,9 @@ namespace zich
  bool Matrix::operator!=(const Matrix &_mat) const
  {
   check_Matrix_size(_mat, 1);
-  for (size_t i = 0; i < _size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
-   if (_mat[i] != mat._mat[i])
+   if (mat[i] != _mat.mat[i])
    {
     return true;
    }
@@ -197,35 +196,35 @@ namespace zich
  bool Matrix::operator>=(const Matrix &_mat) const
  {
   check_Matrix_size(_mat, 1);
-  return mat.Matrix_sum() <= this->Matrix_sum();
+  return _mat.Matrix_sum() <= this->Matrix_sum();
  }
 
  bool Matrix::operator<=(const Matrix &_mat) const
  {
   check_Matrix_size(_mat, 1);
-  return mat.Matrix_sum() >= this->Matrix_sum();
+  return _mat.Matrix_sum() >= this->Matrix_sum();
  }
 
  bool Matrix::operator<(const Matrix &_mat) const
  {
   check_Matrix_size(_mat, 1);
-  return mat.Matrix_sum() > this->Matrix_sum();
+  return _mat.Matrix_sum() > this->Matrix_sum();
  }
 
  bool Matrix::operator>(const Matrix &_mat) const
  {
   check_Matrix_size(_mat, 1);
-  return mat.Matrix_sum() < this->Matrix_sum();
+  return _mat.Matrix_sum() < this->Matrix_sum();
  }
 
  Matrix operator*(int num, Matrix _mat)
  {
-  vector<double> temp((size_t)(mat._size));
+  vector<double> temp((size_t)(mat.size));
   for (size_t i = 0; i < mat._size; ++i)
   {
-   temp[i] = mat._mat[i] * num;
+   temp[i] = _mat.mat[i] * num;
   }
-  return Matrix(temp, mat._row, mat._col);
+  return Matrix(temp, _mat.row, _mat.col);
  }
 
  int count_row(string str, char to_count)
@@ -292,16 +291,16 @@ namespace zich
  std::ostream &operator<<(std::ostream &out, const Matrix &_mat)
  {
   int count = 0;
-  for (size_t i = 0; i < mat._size; ++i)
+  for (size_t i = 0; i < _mat.size; ++i)
   {
    if (count == 0)
    {
     out << "[";
    }
-   out << mat._mat[i];
-   out << ((count != mat._col - 1) ? " " : (i != mat._size - 1) ? "]\n"
+   out << _mat.mat[i];
+   out << ((count != _mat.col - 1) ? " " : (i != _mat.size - 1) ? "]\n"
                                                                 : "]");
-   count = count == mat._col - 1 ? 0 : ++count;
+   count = count == _mat.col - 1 ? 0 : ++count;
   }
   return out;
  }
