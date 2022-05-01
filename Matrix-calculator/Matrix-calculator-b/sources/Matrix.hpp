@@ -5,240 +5,272 @@ using namespace std;
 
 namespace zich
 {
-    class Matrix
+ class Matrix
+ {
+ private:
+  int row;
+  int col;
+  int size;
+  vector<double> mat;
+
+ public:
+  /**
+   *
+   * @param mat The Matrix
+   * @param row The row
+   * @param column The columns
+   *
+   */
+
+  Matrix(const vector<double> &mat, int row, int col);
+
+  /**
+   * operator +
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  Matrix operator+(const Matrix &mat) const;
+
+  /**
+   * operator -
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  Matrix operator-(const Matrix &mat) const;
+
+  /**
+   * operator *
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  Matrix operator*(const Matrix &mat) const;
+
+  /**
+   * operator *
+   *
+   * @param num The number we want to double the Matrix
+   * @return Matrix.
+   */
+
+  Matrix operator*(double num) const;
+
+  /**
+   * operator -
+   * - unary
+   * @return Matrix.
+   */
+
+  Matrix operator-();
+
+  /**
+   * operator +
+   * + unary
+   * @return Matrix.
+   */
+
+  Matrix operator+();
+
+  /**
+   * operator ++ (increment)
+   * @return Matrix.
+   */
+
+  Matrix &operator++();
+
+  /**
+   * operator ++
+   * @return Matrix.
+   */
+
+  Matrix operator++(int);
+
+  /**
+   * operator -- (Decrement)
+   * @return Matrix.
+   */
+
+  Matrix &operator--();
+
+  /**
+   * operator --
+   * @return Matrix.
+   */
+
+  Matrix operator--(int);
+
+  /**
+   * operator +=
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  Matrix &operator+=(const Matrix &mat);
+
+  /**
+   * operator -=
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  Matrix &operator-=(const Matrix &mat);
+
+  /**
+   * operator *=
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  Matrix &operator*=(const Matrix &mat);
+
+  /**
+   * operator *=
+   *
+   * @param num The number we want to double the Matrix
+   * @return Matrix.
+   */
+
+  Matrix &operator*=(double num);
+
+  /**
+   * operator ==
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  bool operator==(const Matrix &mat) const;
+
+  /**
+   * operator !=
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  bool operator!=(const Matrix &mat) const;
+
+  /**
+   * operator >=
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  bool operator>=(const Matrix &mat) const;
+
+  /**
+   * operator <=
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  bool operator<=(const Matrix &mat) const;
+
+  /**
+   * operator <
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  bool operator<(const Matrix &mat) const;
+
+  /**
+   * operator >
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  bool operator>(const Matrix &mat) const;
+
+  /**
+   * operator *
+   *
+   * @param mat The Vector expressing the Matrix
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  friend Matrix operator*(int num, Matrix mat);
+
+  /**
+   * operator *
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  friend std::istream &operator>>(std::istream &in, Matrix &mat);
+
+  /**
+   * operator *
+   *
+   * @param mat The Vector expressing the Matrix
+   * @return Matrix.
+   */
+
+  friend std::ostream &operator<<(std::ostream &out, const Matrix &mat);
+
+  /**
+   * A function that checks the integrity of the input
+   *
+   * @param mat The Vector expressing the Matrix
+   * @param row The rows
+   * @param col The columns
+   * @return True or error.
+   */
+
+  bool arg_check(int row, int col, vector<double> mat)
+  {
+
+   size = row * col;
+   if (col < 1 || row < 1 || mat.size() != size)
+   {
+    throw invalid_argument("Matrix size < 0");
+   }
+   return true;
+  }
+
+  /**
+   * A function is responsible for checking the integrity of the Matrix dimension
+   *
+   * @param mat The Vector expressing the Matrix
+   * @param mode Number representing the operations Account 1 for (+,-,==,!=, <=...) 2 to (*)
+
+   * @return True or error.
+   */
+
+  bool check_Matrix_size(Matrix mat, int mode) const
+  {
+   switch (mode)
+   {
+   case 1:
+
+    if (mat.col != col || mat.row != row)
     {
-    private:
-        int _row, _col, _size;
-        vector<double> _mat;
-
-    public:
-        /**
-         * Constructor.
-         *
-         * @param mat The Vector expressing the matrix
-         * @param row The Number of row
-         * @param column The Number of columns
-         * @return None.
-         */
-        Matrix(const vector<double> &mat, int row, int col);
-        /**
-         * operator + overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        Matrix operator+(const Matrix &mat) const;
-        /**
-         * operator - overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        Matrix operator-(const Matrix &mat) const;
-        /**
-         * operator * overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        Matrix operator*(const Matrix &mat) const;
-        /**
-         * operator * overloading.
-         *
-         * @param num The number we want to double the matrix
-         * @return new Matrix.
-         */
-        Matrix operator*(double num) const;
-        /**
-         * operator - overloading.
-         * - unary
-         * @return new Matrix.
-         */
-        Matrix operator-();
-        /**
-         * operator + overloading.
-         * + unary
-         * @return new Matrix.
-         */
-        Matrix operator+();
-        /**
-         * operator ++ overloading.
-         * ++increment
-         * @return new Matrix.
-         */
-        Matrix &operator++();
-        /**
-         * operator ++ overloading.
-         * increment++
-         * @return new Matrix.
-         */
-        Matrix operator++(int);
-        /**
-         * operator ++ overloading.
-         * --Decrement
-         * @return new Matrix.
-         */
-        Matrix &operator--();
-        /**
-         * operator ++ overloading.
-         * Decrement--
-         * @return new Matrix.
-         */
-        Matrix operator--(int);
-        /**
-         * operator += overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        Matrix &operator+=(const Matrix &mat);
-        /**
-         * operator -= overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        Matrix &operator-=(const Matrix &mat);
-        /**
-         * operator *= overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        Matrix &operator*=(const Matrix &mat);
-        /**
-         * operator *= overloading.
-         *
-         * @param num The number we want to double the matrix
-         * @return new Matrix.
-         */
-        Matrix &operator*=(double num);
-        /**
-         * operator == overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        bool operator==(const Matrix &mat) const;
-        /**
-         * operator != overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        bool operator!=(const Matrix &mat) const;
-        /**
-         * operator >= overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        bool operator>=(const Matrix &mat) const;
-        /**
-         * operator <= overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        bool operator<=(const Matrix &mat) const;
-        /**
-         * operator < overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        bool operator<(const Matrix &mat) const;
-        /**
-         * operator > overloading.
-         *
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        bool operator>(const Matrix &mat) const;
-        /**
-         * operator * overloading.
-         *
-         * example:
-         * let a a matrix
-         * 3*a
-         * @param mat The Vector expressing the matrix
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        friend Matrix operator*(int num, Matrix mat);
-        /**
-         * operator * overloading.
-         *
-         * @param in
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        friend std::istream &operator>>(std::istream &in, Matrix &mat);
-        /**
-         * operator * overloading.
-         *
-         * @param out
-         * @param mat The Vector expressing the matrix
-         * @return new Matrix.
-         */
-        friend std::ostream &operator<<(std::ostream &out, const Matrix &mat);
-
-        /**
-         * A function is responsible for summing the matrix members
-         * @return Double sum of matrix .
-         */
-        double Matrix_sum() const
-        {
-            double count = 0;
-            for (size_t i = 0; i < _size; ++i)
-            {
-                count += _mat[i];
-            }
-            return count;
-        }
-        /**
-         * A function that checks the integrity of the input
-         *
-         * @param mat The Vector expressing the matrix
-         * @param row The Number of row
-         * @param col The Number of columns
-         * @return True If all the integrity tests are correct else throw error .
-         */
-        bool valid_argument(int row, int col, vector<double> mat)
-        {
-            if (col < 1 || row < 1 || mat.size() != row * col)
-            {
-                throw invalid_argument("matrix size must be grater then 0");
-            }
-            return true;
-        }
-        /**
-         * A function is responsible for checking the integrity of the matrix dimension
-         *
-         * @param mat The Vector expressing the matrix
-         * @param mode Number representing the operations Account 1 for (+,-,==,!=, <=...) 2 to (*)
-         * @return True If all the integrity tests are correct else throw error .
-         */
-        bool valid_size_matrix(Matrix mat, int mode) const
-        {
-            switch (mode)
-            {
-            case 1:
-
-                if (mat._col != _col || mat._row != _row)
-                {
-                    throw invalid_argument("invalid matrix size for operator +");
-                }
-                break;
-            case 2:
-                if (_col != mat._row)
-                {
-                    throw invalid_argument("invalid matrix size for operator *");
-                }
-                break;
-            }
-            return true;
-        }
-    };
+     throw invalid_argument("invalid Matrix size for operator +");
+    }
+    break;
+   case 2:
+    if (col != mat.row)
+    {
+     throw invalid_argument("invalid Matrix size for operator *");
+    }
+    break;
+   }
+   return true;
+  }
+ };
 
 }
