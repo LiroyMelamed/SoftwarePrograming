@@ -65,46 +65,54 @@ namespace ariel
      */
     bool valid(int page, int row_number, int col, ariel::Direction dir, int mode, string const &str = "OK", int len = 1)
     {
+      /*
+      Checking the parameters before use
+      The row number, column, and page number should be positive values
+      */
       if (row_number < 0 || col < 0 || col >= 100 || page < 0 || len < 0)
-        throw invalid_argument("Only possitive parameters");
+        throw invalid_argument("Incorrect parameters, can not write in negative locations");
 
-      uint page_num = (uint)page;
+      uint page_number = (uint)page;
       uint row = (uint)row_number;
       uint column = (uint)col;
       uint length = (uint)len;
+      // Output deviation from the received column (not more than 100 columns)
+      if (column >= 100)
+        throw invalid_argument("column is invalid");
 
-      // write
-      if (mode == 1)
+      // validity read
+      if (mode)
+      {
+        // Check reading input length, not more than 100 columns per line or negative output length
+        if (((length > 100 || length + column > 100) && dir == Direction::Horizontal) || length < 0)
+          throw invalid_argument("String length is invalid");
+      }
+      // validity write
+      else if (mode == 1)
       {
         uint length_str = str.length();
-        if ((length_str + column >= 100 || length_str >= 100) && dir == Direction::Horizontal)
-          throw invalid_argument("String len is invalid");
+
+        // String length integrity check
         if (length_str == 0)
           throw invalid_argument("An empty string");
+
+        // Input deviation from the received column (no more than 100 columns)
+        if ((length_str + column >= 100 || length_str >= 100) && dir == Direction::Horizontal)
+          throw invalid_argument("String length is invalid");
       }
-      // read
-      else if (mode)
-      {
-        if (((len > 100 || length + column > 100) && dir == Direction::Horizontal) || len < 0)
-          throw invalid_argument("Change string length");
-      }
-      // erase
+      // validity erase
       else
       {
-        if ((len >= 100 || length + column >= 100) && dir == Direction::Horizontal)
-          throw invalid_argument("String len is incorrect");
+        // Check the input length for deletion
+        if ((length >= 100 || length + column >= 100) && dir == Direction::Horizontal)
+          throw invalid_argument("String length is invalid");
       }
-
-      if (column >= 100)
-        throw invalid_argument("More than 100 columns");
-
-      // Checking if the page exist
-      if (Notebook::page_check(page_num))
-        Notebook::set_page(page_num);
+      // Once all the tests are correct we will want to check if the requested page exists and create if necessary
+      if (Notebook::pageExist(page_number))
+        Notebook::setPage(page_number);
 
       return 1;
     }
-
     /**
      * Checking the existence of a page.
      *
