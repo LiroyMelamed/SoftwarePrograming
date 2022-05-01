@@ -36,7 +36,7 @@ namespace ariel
      * @param len The chosen length of string we want.
      *
      */
-    string print(int page, int row, int column, ariel::Direction dir, int len);
+    string read(int page, int row, int column, ariel::Direction dir, int length);
 
     /**
      * delete_sym string from the page.

@@ -6,7 +6,7 @@ using ariel::Notebook;
 using namespace std;
 typedef unsigned int uint;
 
-void Notebook::print(int page, int row_number, int column, ariel::Direction direction, string const &str)
+void Notebook::change(int page, int row_number, int column, ariel::Direction direction, string const &str)
 {
  uint row = (uint)row_number;
  uint col = (uint)column;
@@ -44,8 +44,8 @@ void Notebook::print(int page, int row_number, int column, ariel::Direction dire
    line = Notebook::notebook[page_number][i];
    if (line[col] != '_' || str[cnt] == '\n' || str[cnt] < ' ' || str[cnt] >= '~')
    {
-    throw invalid_argument("Cant write vertical")
-        flag = false;
+    throw invalid_argument("Cant write vertical");
+    flag = false;
     return;
    }
   }
@@ -56,7 +56,7 @@ void Notebook::print(int page, int row_number, int column, ariel::Direction dire
  }
 }
 
-string Notebook::print(int page, int row_number, int column, ariel::Direction direction, int len)
+string Notebook::read(int page, int row_number, int column, ariel::Direction direction, int len)
 {
  if (!Notebook::valid(page, row_number, column, direction, 1, "f", len))
  {
@@ -88,7 +88,7 @@ string Notebook::print(int page, int row_number, int column, ariel::Direction di
  return word;
 }
 
-void Notebook::delete (int page, int row_number, int column, ariel::Direction direction, int len)
+void Notebook::delete_sym(int page, int row_number, int column, ariel::Direction direction, int len)
 {
 
  uint row = (uint)row_number;
