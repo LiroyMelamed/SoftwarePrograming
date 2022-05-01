@@ -76,7 +76,7 @@ namespace ariel
       // write
       if (mode == 1)
       {
-        uint length_str = str.len();
+        uint length_str = str.length();
         if ((length_str + column >= 100 || length_str >= 100) && dir == Direction::Horizontal)
           throw invalid_argument("String len is invalid");
         if (length_str == 0)
@@ -85,13 +85,13 @@ namespace ariel
       // read
       else if (mode)
       {
-        if (((len > 100 || len + column > 100) && dir == Direction::Horizontal) || len < 0)
+        if (((len > 100 || length + column > 100) && dir == Direction::Horizontal) || len < 0)
           throw invalid_argument("Change string length");
       }
       // erase
       else
       {
-        if ((len >= 100 || len + column >= 100) && dir == Direction::Horizontal)
+        if ((len >= 100 || length + column >= 100) && dir == Direction::Horizontal)
           throw invalid_argument("String len is incorrect");
       }
 
@@ -176,17 +176,16 @@ namespace ariel
           Notebook::set_row(page_num, i);
       }
     }
-  };
-
+  }
   /**
    * Returns the requested page.
    *
    * This function returns the requested page.
    *
    */
-  map<uint, string> getPage(uint page_num)
+  map<uint, string>
+  getPage(uint page_num)
   {
     return Notebook::notebook[page_num];
-  }
-
+  };
 }
