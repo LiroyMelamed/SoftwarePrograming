@@ -52,7 +52,7 @@ namespace ariel
      * Function responsible for conveniently displaying the page.
      *
      */
-    void print(int page_num);
+    void print_page(int page_num);
     map<uint, map<uint, string>> notebook;
 
   private:

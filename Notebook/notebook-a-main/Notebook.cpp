@@ -114,7 +114,7 @@ void Notebook::delete_sym(int page, int row_number, int column, ariel::Direction
  }
 }
 
-void Notebook::print(int page_n)
+void Notebook::print_page(int page_n)
 {
  if (page_n < 0)
  {
