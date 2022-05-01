@@ -16,40 +16,40 @@ namespace zich
  public:
   /**
    *
-   * @param mat The Matrix
-   * @param row The row
-   * @param column The columns
+   * @param _mat The Matrix
+   * @param _row The row
+   * @param _column The columns
    *
    */
 
-  Matrix(const vector<double> &mat, int row, int col);
+  Matrix(const vector<double> &_mat, int _row, int _col);
 
   /**
    * operator +
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix operator+(const Matrix &mat) const;
+  Matrix operator+(const Matrix &_mat) const;
 
   /**
    * operator -
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix operator-(const Matrix &mat) const;
+  Matrix operator-(const Matrix &_mat) const;
 
   /**
    * operator *
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix operator*(const Matrix &mat) const;
+  Matrix operator*(const Matrix &_mat) const;
 
   /**
    * operator *
@@ -62,7 +62,6 @@ namespace zich
 
   /**
    * operator -
-   * - unary
    * @return Matrix.
    */
 
@@ -70,7 +69,6 @@ namespace zich
 
   /**
    * operator +
-   * + unary
    * @return Matrix.
    */
 
@@ -107,29 +105,29 @@ namespace zich
   /**
    * operator +=
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix &operator+=(const Matrix &mat);
+  Matrix &operator+=(const Matrix &_mat);
 
   /**
    * operator -=
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix &operator-=(const Matrix &mat);
+  Matrix &operator-=(const Matrix &_mat);
 
   /**
    * operator *=
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix &operator*=(const Matrix &mat);
+  Matrix &operator*=(const Matrix &_mat);
 
   /**
    * operator *=
@@ -143,99 +141,109 @@ namespace zich
   /**
    * operator ==
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator==(const Matrix &mat) const;
+  bool operator==(const Matrix &_mat) const;
 
   /**
    * operator !=
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator!=(const Matrix &mat) const;
+  bool operator!=(const Matrix &_mat) const;
 
   /**
    * operator >=
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator>=(const Matrix &mat) const;
+  bool operator>=(const Matrix &_mat) const;
 
   /**
    * operator <=
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator<=(const Matrix &mat) const;
+  bool operator<=(const Matrix &_mat) const;
 
   /**
    * operator <
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator<(const Matrix &mat) const;
+  bool operator<(const Matrix &_mat) const;
 
   /**
    * operator >
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator>(const Matrix &mat) const;
+  bool operator>(const Matrix &_mat) const;
 
   /**
    * operator *
    *
-   * @param mat The Vector expressing the Matrix
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  friend Matrix operator*(int num, Matrix mat);
+  friend Matrix operator*(int num, Matrix _mat);
 
   /**
    * operator *
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  friend std::istream &operator>>(std::istream &in, Matrix &mat);
+  friend std::istream &operator>>(std::istream &in, Matrix &_mat);
 
   /**
    * operator *
    *
-   * @param mat The Vector expressing the Matrix
+   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  friend std::ostream &operator<<(std::ostream &out, const Matrix &mat);
+  friend std::ostream &operator<<(std::ostream &out, const Matrix &_mat);
+
+  /**
+   * A function is responsible for summing the matrix members
+   * @return Double sum of matrix .
+   */
+  double Matrix_sum() const
+  {
+   double count = 0;
+   for (size_t i = 0; i < size; ++i)
+   {
+    count += mat[i];
+   }
+   return count;
+  }
 
   /**
    * A function that checks the integrity of the input
    *
-   * @param mat The Vector expressing the Matrix
-   * @param row The rows
-   * @param col The columns
    * @return True or error.
    */
 
-  bool arg_check(int row, int col, vector<double> mat)
+  bool arg_check(int _row, int _col, vector<double> _mat)
   {
 
    size = row * col;
-   if (col < 1 || row < 1 || mat.size() != size)
+   if (_col < 1 || _row < 1 || _mat.size() != size)
    {
     throw invalid_argument("Matrix size < 0");
    }
@@ -251,19 +259,19 @@ namespace zich
    * @return True or error.
    */
 
-  bool check_Matrix_size(Matrix mat, int mode) const
+  bool check_Matrix_size(Matrix _mat, int mode) const
   {
    switch (mode)
    {
    case 1:
 
-    if (mat.col != col || mat.row != row)
+    if (_mat.col != col || _mat.row != row)
     {
      throw invalid_argument("invalid Matrix size for operator +");
     }
     break;
    case 2:
-    if (col != mat.row)
+    if (col != _mat.row)
     {
      throw invalid_argument("invalid Matrix size for operator *");
     }
