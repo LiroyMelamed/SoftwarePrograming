@@ -53,7 +53,7 @@ namespace zich
     {
      uint _row = i * (size_t)col + k;
      uint _col = k * (size_t)_mat.col + j;
-     temp[index] += mat[row] * _mat.mat[col];
+     temp[index] += mat[_row] * _mat.mat[_col];
     }
    }
   }
@@ -81,7 +81,7 @@ namespace zich
    }
    temp[i] = mat[i] * -1;
   }
-  return Matrix(temp, row, col)
+  return Matrix(temp, row, col);
  }
 
  Matrix Matrix::operator+()
@@ -219,8 +219,8 @@ namespace zich
 
  Matrix operator*(int num, Matrix _mat)
  {
-  vector<double> temp((size_t)(mat.size));
-  for (size_t i = 0; i < mat.size; ++i)
+  vector<double> temp((size_t)(_mat.size));
+  for (size_t i = 0; i < _mat.size; ++i)
   {
    temp[i] = _mat.mat[i] * num;
   }
