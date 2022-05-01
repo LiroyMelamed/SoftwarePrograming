@@ -176,16 +176,16 @@ namespace ariel
           Notebook::set_row(page_num, i);
       }
     }
-  }
-  /**
-   * Returns the requested page.
-   *
-   * This function returns the requested page.
-   *
-   */
-  map<uint, string>
-  getPage(uint page_num)
-  {
-    return Notebook::notebook[page_num];
+    /**
+     * Returns the requested page.
+     *
+     * This function returns the requested page.
+     *
+     */
+    map<uint, string>
+    getPage(uint page_num)
+    {
+      return Notebook::notebook[page_num];
+    }
   };
 }
