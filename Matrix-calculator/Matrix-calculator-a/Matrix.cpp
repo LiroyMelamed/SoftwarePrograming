@@ -12,8 +12,8 @@ namespace zich
   arg_check(_row, _col, _mat);
   col = _col;
   row = _row;
-  mat = _mat;
-  size = _row * _col;
+  mat = (_mat);
+  size = (_row * _col);
  }
 
  Matrix Matrix::operator+(const Matrix &_mat) const
@@ -140,9 +140,9 @@ namespace zich
  Matrix &Matrix::operator-=(const Matrix &_mat)
  {
   check_Matrix_size(_mat, 1);
-  for (size_t i = 0; i < _size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
-   _mat[i] -= mat._mat[i];
+   mat[i] -= _mat.mat[i];
   }
   return *this;
  }
@@ -220,7 +220,7 @@ namespace zich
  Matrix operator*(int num, Matrix _mat)
  {
   vector<double> temp((size_t)(mat.size));
-  for (size_t i = 0; i < mat._size; ++i)
+  for (size_t i = 0; i < mat.size; ++i)
   {
    temp[i] = _mat.mat[i] * num;
   }
@@ -284,7 +284,7 @@ namespace zich
     mat_v.push_back(std::stod(str.substr(j, i - j)));
    }
   }
-  mat = Matrix(mat_v, row, int(mat_v.size()) / row);
+  _mat = Matrix(mat_v, row, int(mat_v.size()) / row);
   return in;
  }
 
