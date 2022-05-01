@@ -71,7 +71,7 @@ namespace ariel
       uint page_num = (uint)page;
       uint row = (uint)row_number;
       uint column = (uint)col;
-      int len = (uint)len;
+      uint length = (uint)len;
 
       // write
       if (mode == 1)
