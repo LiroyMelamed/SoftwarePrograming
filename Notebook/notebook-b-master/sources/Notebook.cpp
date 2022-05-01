@@ -8,11 +8,6 @@ typedef unsigned int uint;
 
 void Notebook::write(int page, int row_number, int column, ariel::Direction direction, string const &str)
 {
- uint row = (uint)row_number;
- uint col = (uint)column;
- uint page_number = (uint)page;
- uint len = (uint)str.length();
- string line;
 
  // checks if the input is valid
  if (!Notebook::valid(page, row_number, column, direction, 0, str))
@@ -20,7 +15,13 @@ void Notebook::write(int page, int row_number, int column, ariel::Direction dire
   throw invalid_argument("Input isnt valid");
  }
 
- if (direction == Direction::Horizontal)
+ uint row = (uint)row_number;
+ uint col = (uint)column;
+ uint page_number = (uint)page;
+ uint len = (uint)str.length();
+ string line;
+
+ if (direction == Direction::Horizontal) //writing direction check
  {
   Notebook::create_lines(page_number, row);
   line = notebook[page_number][row];
@@ -90,6 +91,10 @@ string Notebook::read(int page, int row_number, int column, ariel::Direction dir
 
 void Notebook::erase(int page, int row_number, int column, ariel::Direction direction, int len)
 {
+ if (!Notebook::valid(page, row_number, column, direction, 2, "ok", len))
+ {
+  return;
+ }
 
  uint row = (uint)row_number;
  uint col = (uint)column;
@@ -98,10 +103,6 @@ void Notebook::erase(int page, int row_number, int column, ariel::Direction dire
  string line;
  string word;
 
- if (!Notebook::valid(page, row_number, column, direction, 2, "ok", len))
- {
-  return;
- }
  uint count_row = (direction == Direction::Vertical) ? length + 1 : 3;
  Notebook::create_lines(page_number, row, count_row);
  for (uint i = row; direction == Direction::Vertical && i < row + length; i++)
@@ -122,8 +123,9 @@ void Notebook::show(int page_n)
  }
 
  uint page_number = (uint)page_n;
- if (Notebook::page_check(page_number))
+ if (Notebook::page_check(page_number)){
   Notebook::set_page(page_number);
+ }
 
  map<uint, string> page = Notebook::getPage(page_number);
  // Print the page conveniently
