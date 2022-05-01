@@ -6,7 +6,7 @@ using ariel::Notebook;
 using namespace std;
 typedef unsigned int uint;
 
-void Notebook::change(int page, int row_number, int column, ariel::Direction direction, string const &str)
+void Notebook::write(int page, int row_number, int column, ariel::Direction direction, string const &str)
 {
  uint row = (uint)row_number;
  uint col = (uint)column;
@@ -88,7 +88,7 @@ string Notebook::read(int page, int row_number, int column, ariel::Direction dir
  return word;
 }
 
-void Notebook::delete_sym(int page, int row_number, int column, ariel::Direction direction, int len)
+void Notebook::erase(int page, int row_number, int column, ariel::Direction direction, int len)
 {
 
  uint row = (uint)row_number;
@@ -114,7 +114,7 @@ void Notebook::delete_sym(int page, int row_number, int column, ariel::Direction
  }
 }
 
-void Notebook::print_page(int page_n)
+void Notebook::show(int page_n)
 {
  if (page_n < 0)
  {

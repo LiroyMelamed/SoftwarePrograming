@@ -26,7 +26,7 @@ namespace ariel
      * @param str The requested string to use.
      */
 
-    void change(int page, int row, int column, ariel::Direction dir, string const &str);
+    void write(int page, int row, int column, ariel::Direction dir, string const &str);
 
     /**
      * Shows the string from the specific page.
@@ -44,7 +44,7 @@ namespace ariel
      * This function responsible for deleting from the page.
      *
      */
-    void delete_sym(int page, int row, int column, ariel::Direction dir, int len);
+    void erase(int page, int row, int column, ariel::Direction dir, int len);
 
     /**
      * print page.
@@ -52,7 +52,7 @@ namespace ariel
      * Function responsible for conveniently displaying the page.
      *
      */
-    void print_page(int page_num);
+    void show(int page_num);
     map<uint, map<uint, string>> notebook;
 
   private:
