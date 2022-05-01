@@ -108,8 +108,8 @@ namespace ariel
           throw invalid_argument("String length is invalid");
       }
       // Once all the tests are correct we will want to check if the requested page exists and create if necessary
-      if (Notebook::pageExist(page_number))
-        Notebook::setPage(page_number);
+      if (Notebook::page_check(page_number))
+        Notebook::set_page(page_number);
 
       return 1;
     }
