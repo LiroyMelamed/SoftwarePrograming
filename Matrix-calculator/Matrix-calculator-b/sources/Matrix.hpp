@@ -241,13 +241,11 @@ namespace zich
 
   bool arg_check(int _row, int _col, vector<double> _mat)
   {
-
-   size = row * col;
-   if (_col < 1 || _row < 1 || _mat.size() != size)
-   {
-    throw invalid_argument("Matrix size < 0");
-   }
-   return true;
+    if (_col < 1 || _row < 1 || _mat.size() != _row * _col)
+            {
+                throw invalid_argument("Matrix size > 0");
+            }
+            return true;
   }
 
   /**
