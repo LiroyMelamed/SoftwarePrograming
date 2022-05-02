@@ -11,7 +11,7 @@ Game::Game()
 }
 string Game::turn()
 {
-    return (num_of_player >= 2) ? *_players[act_turn]->getName() : "Waiting for more players";
+    return (num_of_player >= 2) ? *_players[act_turn]->get_name() : "Waiting for more players";
 }
 vector<string> Game::players()
 {
@@ -20,7 +20,7 @@ vector<string> Game::players()
     {
         if (obj->is_alive())
         {
-            names.push_back(*obj->getName());
+            names.push_back(*obj->get_name());
         }
     }
     return names;
