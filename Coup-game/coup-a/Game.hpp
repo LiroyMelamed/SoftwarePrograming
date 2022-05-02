@@ -5,7 +5,6 @@
 #include <string>
 #include "Card.hpp"
 #include "Player.hpp"
-#define MAX_PLAYERS 6
 using coup::CardType;
 using namespace std;
 
@@ -15,16 +14,15 @@ namespace coup
   class Game
   {
   private:
-    string game;
-    vector<player *> _players;
-    bool active;
+    string _game;
+    vector<Player *> _players;
+    bool running;
     unsigned int num_of_player;
-    unsigned int _turn;
+    unsigned int act_turn;
 
   public:
     /**
-     * @brief Constructor
-     * Creates a new object
+     * @brief creates a new object
      *
      * @return None.
      */
@@ -41,12 +39,6 @@ namespace coup
      * @return Returns a vector that contains the players names in the game.
      */
     vector<string> players();
-    /**
-     * @brief returning the name of the player who won the game
-     *
-     * @return The name of the winner.
-     */
-    string winner();
     /**
      * @brief creating a vector that contains the object of the players.
      *
@@ -65,7 +57,7 @@ namespace coup
      *
      * @return None.
      */
-    void inc_player_number();
+    void inc_player_num();
     /**
      *@brief returns the number of players that started the game.
      *
@@ -78,22 +70,24 @@ namespace coup
      * @return None.
      */
     void next_turn();
+    /**
+     * @brief returning the name of the player who won the game
+     *
+     * @return The name of the winner.
+     */
+    string winner();
     
     void set_name();
  
     string get_name();
 
     void set_turn();
-    /**
-     *@brief returning the current queue number.
-     *
-     * @return Current queue number.
-     */
+    
     unsigned int get_turn() const;
  
-    void set_active();
+    void set_running();
 
-    bool get_active();
+    bool get_running();
   };
 
 }

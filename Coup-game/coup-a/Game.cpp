@@ -4,14 +4,14 @@ using namespace coup;
 
 Game::Game()
 {
-    game = "Coup";
-    turn = 0;
-    active = false;
+    _game = "Coup";
+    act_turn = 0;
+    running = false;
     num_of_player = 0;
 }
 string Game::turn()
 {
-    return (num_of_player >= 2) ? *_players[turn]->getName() : "The game is waiting for more players";
+    return (num_of_player >= 2) ? *_players[act_turn]->getName() : "Waiting for more players";
 }
 vector<string> Game::players()
 {
@@ -31,35 +31,34 @@ vector<Player *> Game::players_obj()
 }
 string Game::winner()
 {
-    vector<string> names = _players();
+    vector<string> names = players();
     if (names.size() == 1)
     {
         return names[0];
     }
-    return "The game is not over yet";
+    return "The game is still running";
 }
-void Game::inc_player_number()
+void Game::inc_player_num()
 {
     this->num_of_player++;
 }
 void Game::add_player(Player *p)
 {
-    if (num_of_player > MAX_players)
+    if (num_of_player > 6)
     {
-        throw invalid_argument("The game is designed for 2-6 players");
+        throw invalid_argument("Only 2-6 players");
     }
     cout << "Hello Player " << *p << endl;
-    players.push_back(p);
-    incPlayerNumber();
+    _players.push_back(p);
+    inc_player_num();
 }
 unsigned int Game::get_turn() const
 {
-    return turn;
+    return act_turn;
 }
 void Game::next_turn()
 {
-    turn = (turn + 1) % num_of_player;
-    ;
+    act_turn = (act_turn + 1) % num_of_player;
 }
 unsigned int Game::get_num_of_players() const
 {
