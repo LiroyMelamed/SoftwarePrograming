@@ -16,10 +16,10 @@ namespace coup
   {
   private:
     string game;
-    vector<player *> players;
+    vector<player *> _players;
     bool active;
     unsigned int num_of_player;
-    unsigned int turn;
+    unsigned int _turn;
 
   public:
     /**
@@ -34,13 +34,13 @@ namespace coup
      *
      * @return Returns the name of the player turn.
      */
-    string _turn();
+    string turn();
     /**
      * @brief creating a vector that contains the names of the players.
      *
      * @return Returns a vector that contains the players names in the game.
      */
-    vector<string> _players();
+    vector<string> players();
     /**
      * @brief returning the name of the player who won the game
      *

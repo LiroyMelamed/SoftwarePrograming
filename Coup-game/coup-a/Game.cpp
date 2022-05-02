@@ -11,12 +11,12 @@ Game::Game()
 }
 string Game::turn()
 {
-    return (num_of_player >= 2) ? *players[turn]->getName() : "The game is waiting for more players";
+    return (num_of_player >= 2) ? *_players[turn]->getName() : "The game is waiting for more players";
 }
-vector<string> Game::_players()
+vector<string> Game::players()
 {
     vector<string> names;
-    for (Player *obj : players)
+    for (Player *obj : _players)
     {
         if (obj->is_alive())
         {
@@ -27,11 +27,11 @@ vector<string> Game::_players()
 }
 vector<Player *> Game::players_obj()
 {
-    return players;
+    return _players;
 }
 string Game::winner()
 {
-    vector<string> names = players();
+    vector<string> names = _players();
     if (names.size() == 1)
     {
         return names[0];
@@ -44,7 +44,7 @@ void Game::inc_player_number()
 }
 void Game::add_player(Player *p)
 {
-    if (num_of_player > MAXplayers)
+    if (num_of_player > MAX_players)
     {
         throw invalid_argument("The game is designed for 2-6 players");
     }
@@ -61,7 +61,7 @@ void Game::next_turn()
     turn = (turn + 1) % num_of_player;
     ;
 }
-unsigned int Game::get_num_ofplayers() const
+unsigned int Game::get_num_of_players() const
 {
     return num_of_player;
 }
