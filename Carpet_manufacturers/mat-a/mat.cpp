@@ -1,15 +1,16 @@
 #include "mat.hpp"
 #include <iostream>
-#include <map>
 #include <vector>
 #include <string.h>
 #include <string>
 using namespace std;
 
-void create_mat(int a, int b, int c, int d, char symbol1, vector<vector<char>> &matrix)
+void create_mat(int a, int b, int c, int d, char char1, vector<vector<char>> &mat)
 {
- int length_row = matrix.size();
- int length_col = matrix[a].size();
+ 
+ int length_row = mat.size();
+
+ int length_col = mat[a].size();
  // Stop conditions for recursion
  if (length_row / 2 < a || c > length_col / 2)
  {
@@ -18,20 +19,20 @@ void create_mat(int a, int b, int c, int d, char symbol1, vector<vector<char>> &
 
  for (int j = c; j < d; j++)
  {
-  matrix[b][j] = symbol1;
-  matrix[a][j] = symbol1;
+  mat[b][j] = char1;
+  mat[a][j] = char1;
  }
 
  for (int j = a; j < b; j++)
  {
-  matrix[j][c] = symbol1;
-  matrix[j][d - 1] = symbol1;
+  mat[j][c] = char1;
+  mat[j][d - 1] = char1;
  }
 
- create_mat(a + 2, b - 2, c + 2, d - 2, symbol1, matrix);
+ create_mat(a + 2, b - 2, c + 2, d - 2, char1, mat);
 }
 
-string ariel::mat(int width, int hight, char symbol1, char symbol2)
+string ariel::mat(int width, int hight, char char1, char char2)
 {
  // Checking if the column and row number is odd
  if (width % 2 == 0 || hight % 2 == 0)
@@ -44,32 +45,32 @@ string ariel::mat(int width, int hight, char symbol1, char symbol2)
   throw invalid_argument("Input must be bigger the 0");
  }
  // Checking the symbol
- if (symbol1 < '!' || symbol1 > '~' || symbol2 < '!' || symbol2 > '~')
+ if (char1 < '!' || char1 > '~' || char2 < '!' || char2 > '~')
  {
   throw invalid_argument("Change your letters");
  }
  // New vector boot of a two-dimensional char type
  vector<vector<char>> vec;
- // Initialize vector rows in symbol2
+ // Initialize vector rows in char2
  for (int i = 0; i < hight; i++)
  {
   vector<char> row;
   row.reserve(width);
   for (int j = 0; j < width; j++)
   {
-   row.push_back(symbol2);
+   row.push_back(char2);
   }
   vec.push_back(row);
  }
  // A call to the function that builds the rug
- create_mat(0, hight - 1, 0, width, symbol1, vec);
+ create_mat(0, hight - 1, 0, width, char1, vec);
  // A new variable of the string type that chains the result of the rug to it
- string mat;
+ string matrix;
  for (int i = 0; i < hight; i++)
  {
   string s(vec[i].begin(), vec[i].end());
-  mat += s + '\n';
+  matrix += s + '\n';
  }
  // Returns the desired result
- return mat;
+ return matrix;
 }

@@ -11,11 +11,10 @@ namespace ariel
   {
 
   public:
-    // constuctor
     Notebook();
 
     /**
-     * change the '_' to what ever we want.
+     * @brief the '_' to what ever we want.
      *
      * This function will write what we want instead of the '_' symbol
      *
@@ -29,7 +28,7 @@ namespace ariel
     void write(int page, int row, int column, ariel::Direction dir, string const &str);
 
     /**
-     * Shows the string from the specific page.
+     * @brief the string from the specific page.
      *
      * This function responsible for showing specific string.
      *
@@ -39,7 +38,7 @@ namespace ariel
     string read(int page, int row, int column, ariel::Direction dir, int length);
 
     /**
-     * delete_sym string from the page.
+     * @brief delete_sym string from the page.
      *
      * This function responsible for deleting from the page.
      *
@@ -47,7 +46,7 @@ namespace ariel
     void erase(int page, int row, int column, ariel::Direction dir, int len);
 
     /**
-     * print page.
+     * @brief page.
      *
      * Function responsible for conveniently displaying the page.
      *
@@ -57,7 +56,7 @@ namespace ariel
 
   private:
     /**
-     * checking if the input is valid.
+     * @brief checking if the input is valid.
      *
      * This function checks the validation of the input.
      *
@@ -106,7 +105,7 @@ namespace ariel
     }
 
     /**
-     * Checking the existence of a page.
+     * @brief the existence of a page.
      *
      * This function checks if the page exist.
      *
@@ -117,7 +116,7 @@ namespace ariel
     }
 
     /**
-     * Checking the existence of a line.
+     * @brief Checking the existence of a line.
      *
      * This function checks if the line exist.
      *
@@ -128,7 +127,7 @@ namespace ariel
     }
 
     /**
-     * Create a new page.
+     * @brief a new page.
      *
      * This function creates the page.
      *
@@ -140,7 +139,7 @@ namespace ariel
     }
 
     /**
-     * Create a new line.
+     * @brief Create a new line.
      *
      * This function creates a line.
      *
@@ -156,7 +155,7 @@ namespace ariel
     }
 
     /**
-     * Creates new lines.
+     * @brief Creates new lines.
      *
      * This function creates a new lines.
      *
@@ -177,7 +176,7 @@ namespace ariel
       }
     }
     /**
-     * Returns the requested page.
+     * @brief Returns the requested page.
      *
      * This function returns the requested page.
      *

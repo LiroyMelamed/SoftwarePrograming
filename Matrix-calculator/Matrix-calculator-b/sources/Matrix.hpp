@@ -16,43 +16,41 @@ namespace zich
  public:
   /**
    *
-   * @param _mat The Matrix
-   * @param _row The row
-   * @param _column The columns
+   * @param mat The Matrix
+   * @param row The row
+   * @param column The columns
    *
    */
 
-  Matrix(const vector<double> &_mat, int _row, int _col);
+  Matrix(const vector<double> &mat, int row, int col);
 
   /**
-   * operator +
+   * @brief operator +
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix operator+(const Matrix &_mat) const;
+  Matrix operator+(const Matrix &mat) const;
 
   /**
-   * operator -
+   * @brief operator -
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix operator-(const Matrix &_mat) const;
+  Matrix operator-(const Matrix &mat) const;
 
   /**
-   * operator *
+   * @brief operator *
    *
-   * @param _mat The Vector expressing the Matrix
+   *
    * @return Matrix.
    */
 
-  Matrix operator*(const Matrix &_mat) const;
+  Matrix operator*(const Matrix &mat) const;
 
   /**
-   * operator *
+   * @brief operator *
    *
    * @param num The number we want to double the Matrix
    * @return Matrix.
@@ -61,215 +59,195 @@ namespace zich
   Matrix operator*(double num) const;
 
   /**
-   * operator -
+   * @brief operator -
+   *
    * @return Matrix.
    */
 
   Matrix operator-();
 
   /**
-   * operator +
+   * @brief operator +
+   *
    * @return Matrix.
    */
 
   Matrix operator+();
 
   /**
-   * operator ++ (increment)
+   * @brief operator ++ (increment)
+   *
    * @return Matrix.
    */
 
   Matrix &operator++();
 
   /**
-   * operator ++
+   * @brief operator ++
+   *
    * @return Matrix.
    */
 
   Matrix operator++(int);
 
   /**
-   * operator -- (Decrement)
+   * @brief operator -- (Decrement)
+   *
    * @return Matrix.
    */
 
   Matrix &operator--();
 
   /**
-   * operator --
+   * @brief operator --
+   *
    * @return Matrix.
    */
 
   Matrix operator--(int);
 
   /**
-   * operator +=
+   * @brief operator +=
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix &operator+=(const Matrix &_mat);
+  Matrix &operator+=(const Matrix &mat);
 
   /**
-   * operator -=
+   * @brief operator -=
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix &operator-=(const Matrix &_mat);
+  Matrix &operator-=(const Matrix &mat);
 
   /**
-   * operator *=
+   * @brief operator *=
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  Matrix &operator*=(const Matrix &_mat);
+  Matrix &operator*=(const Matrix &mat);
 
   /**
-   * operator *=
+   * @brief operator *=
    *
-   * @param num The number we want to double the Matrix
    * @return Matrix.
    */
 
   Matrix &operator*=(double num);
 
   /**
-   * operator ==
+   * @brief operator ==
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator==(const Matrix &_mat) const;
+  bool operator==(const Matrix &mat) const;
 
   /**
-   * operator !=
+   * @brief operator !=
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator!=(const Matrix &_mat) const;
+  bool operator!=(const Matrix &mat) const;
 
   /**
-   * operator >=
+   * @brief operator >=
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator>=(const Matrix &_mat) const;
+  bool operator>=(const Matrix &mat) const;
 
   /**
-   * operator <=
+   * @brief operator <=
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator<=(const Matrix &_mat) const;
+  bool operator<=(const Matrix &mat) const;
 
   /**
-   * operator <
+   * @brief operator <
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator<(const Matrix &_mat) const;
+  bool operator<(const Matrix &mat) const;
 
   /**
-   * operator >
+   * @brief operator >
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  bool operator>(const Matrix &_mat) const;
+  bool operator>(const Matrix &mat) const;
 
   /**
-   * operator *
+   * @brief operator *
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  friend Matrix operator*(int num, Matrix _mat);
+  friend Matrix operator*(int num, Matrix mat);
 
   /**
-   * operator *
+   * @brief operator *
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  friend std::istream &operator>>(std::istream &in, Matrix &_mat);
+  friend std::istream &operator>>(std::istream &in, Matrix &mat);
 
   /**
-   * operator *
+   * @brief operator *
    *
-   * @param _mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
-  friend std::ostream &operator<<(std::ostream &out, const Matrix &_mat);
+  friend std::ostream &operator<<(std::ostream &out, const Matrix &mat);
 
   /**
-   * A function is responsible for summing the matrix members
-   * @return Double sum of matrix .
+   * @brief checks the integrity of the input
+   *
+   * @return True or error.
    */
-  double Matrix_sum() const
+
+  bool arg_check(int row, int col, vector<double> mat)
   {
-   double count = 0;
-   for (size_t i = 0; i < size; ++i)
+
+   size = row * col;
+   if (col < 1 || row < 1 || mat.size() != size)
    {
-    count += mat[i];
+    throw invalid_argument("Matrix size < 0");
    }
-   return count;
+   return true;
   }
 
   /**
-   * A function that checks the integrity of the input
+   * @brief checking the integrity of the Matrix dimension
    *
-   * @return True or error.
-   */
-
-  bool arg_check(int _row, int _col, vector<double> _mat)
-  {
-    if (_col < 1 || _row < 1 || _mat.size() != _row * _col)
-            {
-                throw invalid_argument("Matrix size > 0");
-            }
-            return true;
-  }
-
-  /**
-   * A function is responsible for checking the integrity of the Matrix dimension
-   *
-   * @param mat The Vector expressing the Matrix
    * @param mode Number representing the operations Account 1 for (+,-,==,!=, <=...) 2 to (*)
-
+   *
    * @return True or error.
    */
 
-  bool check_Matrix_size(Matrix _mat, int mode) const
+  bool check_Matrix_size(Matrix mat, int mode) const
   {
    switch (mode)
    {
    case 1:
 
-    if (_mat.col != col || _mat.row != row)
+    if (mat.col != col || mat.row != row)
     {
      throw invalid_argument("invalid Matrix size for operator +");
     }
     break;
    case 2:
-    if (col != _mat.row)
+    if (col != mat.row)
     {
      throw invalid_argument("invalid Matrix size for operator *");
     }

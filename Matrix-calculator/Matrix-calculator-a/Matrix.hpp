@@ -25,34 +25,32 @@ namespace zich
   Matrix(const vector<double> &mat, int row, int col);
 
   /**
-   * operator +
+   * @brief operator +
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   Matrix operator+(const Matrix &mat) const;
 
   /**
-   * operator -
+   * @brief operator -
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   Matrix operator-(const Matrix &mat) const;
 
   /**
-   * operator *
+   * @brief operator *
    *
-   * @param mat The Vector expressing the Matrix
+   *
    * @return Matrix.
    */
 
   Matrix operator*(const Matrix &mat) const;
 
   /**
-   * operator *
+   * @brief operator *
    *
    * @param num The number we want to double the Matrix
    * @return Matrix.
@@ -61,173 +59,160 @@ namespace zich
   Matrix operator*(double num) const;
 
   /**
-   * operator -
-   * - unary
+   * @brief operator -
+   *
    * @return Matrix.
    */
 
   Matrix operator-();
 
   /**
-   * operator +
-   * + unary
+   * @brief operator +
+   *
    * @return Matrix.
    */
 
   Matrix operator+();
 
   /**
-   * operator ++ (increment)
+   * @brief operator ++ (increment)
+   *
    * @return Matrix.
    */
 
   Matrix &operator++();
 
   /**
-   * operator ++
+   * @brief operator ++
+   *
    * @return Matrix.
    */
 
   Matrix operator++(int);
 
   /**
-   * operator -- (Decrement)
+   * @brief operator -- (Decrement)
+   *
    * @return Matrix.
    */
 
   Matrix &operator--();
 
   /**
-   * operator --
+   * @brief operator --
+   *
    * @return Matrix.
    */
 
   Matrix operator--(int);
 
   /**
-   * operator +=
+   * @brief operator +=
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   Matrix &operator+=(const Matrix &mat);
 
   /**
-   * operator -=
+   * @brief operator -=
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   Matrix &operator-=(const Matrix &mat);
 
   /**
-   * operator *=
+   * @brief operator *=
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   Matrix &operator*=(const Matrix &mat);
 
   /**
-   * operator *=
+   * @brief operator *=
    *
-   * @param num The number we want to double the Matrix
    * @return Matrix.
    */
 
   Matrix &operator*=(double num);
 
   /**
-   * operator ==
+   * @brief operator ==
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   bool operator==(const Matrix &mat) const;
 
   /**
-   * operator !=
+   * @brief operator !=
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   bool operator!=(const Matrix &mat) const;
 
   /**
-   * operator >=
+   * @brief operator >=
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   bool operator>=(const Matrix &mat) const;
 
   /**
-   * operator <=
+   * @brief operator <=
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   bool operator<=(const Matrix &mat) const;
 
   /**
-   * operator <
+   * @brief operator <
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   bool operator<(const Matrix &mat) const;
 
   /**
-   * operator >
+   * @brief operator >
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   bool operator>(const Matrix &mat) const;
 
   /**
-   * operator *
+   * @brief operator *
    *
-   * @param mat The Vector expressing the Matrix
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   friend Matrix operator*(int num, Matrix mat);
 
   /**
-   * operator *
+   * @brief operator *
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   friend std::istream &operator>>(std::istream &in, Matrix &mat);
 
   /**
-   * operator *
+   * @brief operator *
    *
-   * @param mat The Vector expressing the Matrix
    * @return Matrix.
    */
 
   friend std::ostream &operator<<(std::ostream &out, const Matrix &mat);
 
   /**
-   * A function that checks the integrity of the input
+   * @brief checks the integrity of the input
    *
-   * @param mat The Vector expressing the Matrix
-   * @param row The rows
-   * @param col The columns
    * @return True or error.
    */
 
@@ -243,11 +228,10 @@ namespace zich
   }
 
   /**
-   * A function is responsible for checking the integrity of the Matrix dimension
+   * @brief checking the integrity of the Matrix dimension
    *
-   * @param mat The Vector expressing the Matrix
    * @param mode Number representing the operations Account 1 for (+,-,==,!=, <=...) 2 to (*)
-
+   *
    * @return True or error.
    */
 

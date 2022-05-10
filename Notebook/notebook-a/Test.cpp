@@ -50,30 +50,13 @@ TEST_CASE("Bad input ")
         CHECK_THROWS(notebook.read(i, 0, 0, Direction::Horizontal, i));
         CHECK_THROWS(notebook.read(i, i, 0, Direction::Horizontal, i));
         CHECK_THROWS(notebook.read(i, i, i, Direction::Horizontal, i));
-        CHECK_THROWS(notebook.read(i, 0, i, Direction::Horizontal, i));
-        CHECK_THROWS(notebook.read(i, i, 0, Direction::Horizontal, i));
-        CHECK_THROWS(notebook.read(i, 0, 0, Direction::Vertical, i * -1));
-        CHECK_THROWS(notebook.read(i, 0, 0, Direction::Vertical, i));
-        CHECK_THROWS(notebook.read(i, i, 0, Direction::Vertical, i));
-        CHECK_THROWS(notebook.read(i, i, i, Direction::Vertical, i));
-        CHECK_THROWS(notebook.read(i, 0, i, Direction::Vertical, i));
-        CHECK_THROWS(notebook.read(i, i, 0, Direction::Vertical, i));
     }
 
     // write more then 100 char to a row from 0 and 99 column
     CHECK_THROWS(notebook.write(1, 0, 0, Direction::Horizontal, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
     CHECK_THROWS(notebook.write(1, 0, 99, Direction::Horizontal, "#$$%^^^^%^%^$%$^%&%"));
 
-    // check if possible to write more then 100 chars to column
-    CHECK_NOTHROW(notebook.write(2, 0, 0, Direction::Vertical, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2"));
-
-    notebook.write(0, 0, 0, Direction::Horizontal, "Check the erase function");
-    notebook.erase(0, 0, 0, Direction::Horizontal, 20);
-    CHECK_THROWS(notebook.write(0, 0, 0, Direction::Horizontal, "Check the erase function"));
-
     // check for invalid input for column over 100 and length of row over 100
     CHECK_THROWS(notebook.read(0, 0, 120, Direction::Horizontal, 10));
     CHECK_THROWS(notebook.erase(0, 0, 120, Direction::Horizontal, 10));
-    CHECK_THROWS(notebook.erase(0, 0, 0, Direction::Horizontal, 150));
-    CHECK_THROWS(notebook.read(0, 0, 0, Direction::Horizontal, 150));
 }
