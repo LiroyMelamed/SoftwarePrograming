@@ -202,25 +202,25 @@ namespace zich
     bool Matrix::operator>=(const Matrix &_mat) const
     {
         check_Matrix_size(_mat, 1);
-        return _mat.Matrix_sum() <= this->Matrix_sum();
+        return _mat.sum_of_mat() <= this->sum_of_mat();
     }
 
     bool Matrix::operator<=(const Matrix &_mat) const
     {
         check_Matrix_size(_mat, 1);
-        return _mat.Matrix_sum() >= this->Matrix_sum();
+        return _mat.sum_of_mat() >= this->sum_of_mat();
     }
 
     bool Matrix::operator<(const Matrix &_mat) const
     {
         check_Matrix_size(_mat, 1);
-        return _mat.Matrix_sum() > this->Matrix_sum();
+        return _mat.sum_of_mat() > this->sum_of_mat();
     }
 
     bool Matrix::operator>(const Matrix &_mat) const
     {
         check_Matrix_size(_mat, 1);
-        return _mat.Matrix_sum() < this->Matrix_sum();
+        return _mat.sum_of_mat() < this->sum_of_mat();
     }
 
     Matrix operator*(int num, Matrix _mat)

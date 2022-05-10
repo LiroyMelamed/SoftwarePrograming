@@ -9,8 +9,11 @@ namespace zich
  {
  private:
   int row;
+
   int col;
+
   int size;
+
   vector<double> mat;
 
  public:
@@ -230,17 +233,16 @@ namespace zich
   /**
    * @brief checking the integrity of the Matrix dimension
    *
-   * @param mode Number representing the operations Account 1 for (+,-,==,!=, <=...) 2 to (*)
+   * @param func Number representing the operations Account 1 for (+,-,==,!=, <=...) 2 to (*)
    *
    * @return True or error.
    */
 
-  bool check_Matrix_size(Matrix mat, int mode) const
+  bool check_Matrix_size(Matrix mat, int func) const
   {
-   switch (mode)
+   switch (func)
    {
    case 1:
-
     if (mat.col != col || mat.row != row)
     {
      throw invalid_argument("invalid Matrix size for operator +");
@@ -255,6 +257,20 @@ namespace zich
    }
    return true;
   }
+
+  /**
+   * @brief summing the matrix members
+   *
+   * @return sum of matrix .
+   */
+ } double sum_of_mat() const
+ {
+  double count = 0;
+  for (size_t i = 0; i < _size; ++i)
+  {
+   count += _mat[i];
+  }
+  return count;
  };
 
 }
