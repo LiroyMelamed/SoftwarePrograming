@@ -4,35 +4,35 @@
 using namespace std;
 using namespace coup;
 
-Duke::Duke(Game &game, const string &name) : Player(name, 0, CardType::Duke, game){}
+Duke::Duke(Game &game, const string &name) : Player(name, 0, CardType::Duke, game) {}
 
 void Duke::block(Player &p)
 {
-    this->last_action = ActionType::err;
+    this->last_act = ActionType::err;
+
+    if (!p.is_playing())
+    {
+        throw invalid_argument("player already couped");
+    }
     if (*this == p)
     {
-        throw invalid_argument("Can not block himself");
+        throw invalid_argument("self block unaviable");
     }
-    if (!p.is_alive())
+    if (p.last_action() == ActionType::foreign_aid)
     {
-        throw invalid_argument("The player was eliminated from the game");
-    }
-    if (p.last_act() == ActionType::foreign_aid)
-    {
-        p.set_money(-2);
-        last_action = ActionType::block;
-        cout << "blocked from " << *this << " to " << p << endl;
+        p.set_coins(-2);
+        last_act = ActionType::block;
     }
     else
     {
-        throw invalid_argument("the last operation " + *p.get_name() + " " + p.get_card_name() + " performed is income, which cannot be blocked by any role");
+        throw invalid_argument("income cannot be blocked by any role");
     }
 }
 void Duke::tax()
 {
-    last_action = ActionType::err;
-    is_turn();
-    set_money(3);
-    last_action = ActionType::tax;
-    cout << "taxed from " << *this << endl;
+    last_act = ActionType::err;
+    player_turn("tax");
+    this->game_name->next_turn();
+    set_coins(3);
+    last_act = ActionType::tax;
 }

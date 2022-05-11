@@ -16,13 +16,14 @@ namespace coup
     {
     private:
         Player *stolen;
+
     public:
-      /**
+        /**
          * Constructor.
          *
          * @return None.
          */
-        Captain(Game &,const  string&);
+        Captain(Game &, const string &);
         /**
          * @brief blocks the captain's steal.
          *
@@ -37,7 +38,7 @@ namespace coup
         void steal(Player &);
         /**
          * @brief the stolen player.
-         * 
+         *
          * @return Player.
          */
         Player *stolen_from();

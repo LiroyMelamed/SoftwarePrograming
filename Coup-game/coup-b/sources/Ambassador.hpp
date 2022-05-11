@@ -5,6 +5,7 @@
 #include <string>
 #include "Game.hpp"
 #include "Player.hpp"
+
 using coup::CardType;
 
 using namespace std;
@@ -42,7 +43,7 @@ namespace coup
          *
          * @return Player.
          */
-        Player *getTransferPlayer(int);
+        Player *get_transfered_p(int);
     };
 
 }

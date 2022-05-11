@@ -18,13 +18,13 @@ namespace coup
     {
     private:
     public:
-     /**
+        /**
          * Constructor.
          *
          * @return None.
          */
         Contessa(Game &, const string &);
-         /**
+        /**
          * @brief blocks the assassin's coup ..
          *
          * @return None.

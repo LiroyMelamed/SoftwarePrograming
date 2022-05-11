@@ -11,27 +11,29 @@ namespace coup
 {
     class Assassin : public Player
 
-    {private:
+    {
+    private:
         Player *attacked;
+
     public:
-      /**
+        /**
          * Constructor.
          *
          * @return None.
          */
-        Assassin(Game &, const string&);
-         /**
+        Assassin(Game &, const string &);
+        /**
          * @brief coup another player
          *
          * @return None.
          */
-        void coup(Player&);
-         /**
+        void coup(Player &);
+        /**
          * @brief the player that coup
          *
          * @return Player.
          */
-        Player *getAttacked();
+        Player *got_attacked();
     };
 
 }

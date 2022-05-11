@@ -108,7 +108,7 @@ TEST_CASE("Bad input")
       CHECK_THROWS(mat(j, i, '$', '%'));
 }
 
-TEST_CASE("Bed letters")
+TEST_CASE("Bad letters")
 {
 
   char a = '\0', b = '\0';

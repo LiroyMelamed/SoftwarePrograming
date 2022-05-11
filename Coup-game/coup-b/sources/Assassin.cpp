@@ -1,36 +1,38 @@
-
 #include "Assassin.hpp"
+
 #include <vector>
 #include <string>
+
 using namespace std;
 using namespace coup;
 
-Assassin::Assassin(Game &game, const string &name) : Player(name, 0, CardType::Assassin, game), attacked(NULL){}
-
+Assassin::Assassin(Game &game, const string &name) : Player(name, 0, CardType::Assassin, game), attacked(NULL) {}
 
 void Assassin::coup(Player &p)
 {
-        this->last_action = ActionType::err;
-        is_turn();
-        if (*this == p)
-        {
-                throw invalid_argument("Can not coup himself");
-        }
-        if (!p.is_alive())
+        this->last_act = ActionType::err;
+        player_turn("coup");
+        if (!p.is_playing())
         {
                 throw invalid_argument("The player was eliminated from the game");
         }
-        if (_money >= 3)
+        if (*this == p)
         {
-                p.set_alive(false);
-                last_action = ActionType::coup;
+                throw invalid_argument("self coup unavaible");
+        }
+        if (num_of_coin >= 3)
+        {
+                num_of_coin = num_of_coin - 3;
+                p.set_playing(false);
+                this->game_name->next_turn();
+                this->game_name->set_active_player(-1);
+                last_act = ActionType::coup;
                 attacked = &p;
-                cout << "Hello coup from " << *this << " to " << p << endl;
                 return;
         }
-        throw invalid_argument("This action can not be performed, the player does not have enough money");
+        throw invalid_argument("coup unavaible - player does not have enough coins");
 }
-Player *Assassin::getAttacked()
+Player *Assassin::got_attacked()
 {
         return attacked;
 }

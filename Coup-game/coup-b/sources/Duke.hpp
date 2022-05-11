@@ -14,26 +14,25 @@ namespace coup
     class Duke : public Player
     {
     private:
-
     public:
         /**
          * Constructor.
          *
          * @return None.
          */
-        Duke(Game& , const string& );   
+        Duke(Game &, const string &);
         /**
          * @brief blocking the double pay.
          *
          * @return None.
          */
-        void block(Player &); 
+        void block(Player &);
         /**
          * @brief duke takes a tax of 3 coins from the .
          *
          * @return None.
          */
-        void tax(); 
+        void tax();
     };
 
 }

@@ -4,27 +4,32 @@
 using namespace std;
 using namespace coup;
 
-Contessa::Contessa(Game &game,const string &name) : Player(name, 0, CardType::Contessa, game){}
+Contessa::Contessa(Game &game, const string &name) : Player(name, 0, CardType::Contessa, game) {}
 
 void Contessa::block(Player &p)
 {
-    last_action = ActionType::err;
+    last_act = ActionType::err;
+
+    if (!p.is_playing())
+    {
+        throw invalid_argument("player already couped");
+    }
     if (*this == p)
     {
-        throw invalid_argument("Can not block himself");
+        throw invalid_argument("self block unavaible");
     }
-    if (!p.is_alive())
+    if (p.last_action() == ActionType::coup)
     {
-        throw invalid_argument("The player was eliminated from the game");
-    }
-    if (p.last_act() == ActionType::coup)
-    {
-        p.getAttacked()->set_alive(true);
-        last_action = ActionType::block;
-        cout << "Hello block from " << *this << " to " << p << endl;
+        if (p.get_card_name() == "Assassin" && p.coupcost() == MAXTOCOUP)
+        {
+            throw invalid_argument("blocked");
+        }
+        p.got_attacked()->set_playing(true);
+        this->game_name->set_active_player(1);
+        last_act = ActionType::block;
     }
     else
     {
-        throw invalid_argument("the last operation " + *p.get_name() + " " + p.get_card_name() + " performed is foreign aid, which cannot be blocked by " + *this->get_name() + " " + this->get_card_name());
+        throw invalid_argument("foreign aid cannot be blocked by " + *this->get_name() + " " + this->get_card_name());
     }
 }

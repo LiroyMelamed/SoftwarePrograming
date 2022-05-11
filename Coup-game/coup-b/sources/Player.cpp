@@ -1,98 +1,98 @@
 #include "Player.hpp"
+
 #include <vector>
 #include <iostream>
 #include <string>
+
 using namespace std;
 using namespace coup;
+
 namespace coup
 {
     Player::Player(const string &name, int money, CardType role, Game &g)
     {
-        _game = &g;
-        last_action = ActionType::start;
-        alive = true;
-        _role = role;
+
         this->name = name;
-        _money = money;
-        turn_number = (*(_game)).get_num_of_players();
-        switch (_role)
+        num_of_coin = money;
+        title = role;
+        game_name = &g;
+        last_act = ActionType::start;
+        playing = true;
+        turn_num = (*(game_name)).get_num_of_players();
+        coup_cost = 0;
+
+        if (g.get_running() || g.get_num_of_players() >= MAXPLAYER)
+        {
+            throw invalid_argument("game unavaible");
+        }
+
+        switch (title)
         {
         case CardType::Duke:
-            this->_card_name = "Duke";
+            this->card_name = "Duke";
             break;
         case CardType::Assassin:
-            this->_card_name = "Assassin";
+            this->card_name = "Assassin";
             break;
         case CardType::Ambassador:
-            this->_card_name = "Ambassador";
+            this->card_name = "Ambassador";
             break;
         case CardType::Captain:
-            this->_card_name = "Captain";
+            this->card_name = "Captain";
             break;
         case CardType::Contessa:
-            this->_card_name = "Contessa";
+            this->card_name = "Contessa";
             break;
         }
-        string line;
-        ifstream myfile("logo_card/" + _card_name);
-        if (myfile.is_open())
-        {
-            while (getline(myfile, line))
-            {
-                actor_draw += "\033[0;34m" + line + "\n";
-            }
-            myfile.close();
-            actor_draw += "\033[0m";
-        }
-        else
-        {
-            cout << "Unable to open file";
-        }
-        
-        (*(_game)).add_player(this);
+        (*(game_name)).add_player(this);
     };
+
     void Player::income()
     {
-        if (is_turn())
+        if (player_turn("income"))
         {
-            last_action = ActionType::income;
-            this->_money++;
+            last_act = ActionType::income;
+            this->num_of_coin++;
+            this->game_name->next_turn();
         }
     }
     void Player::foreign_aid()
     {
-        if (is_turn())
+        if (player_turn("foreign_aid"))
         {
-            last_action = ActionType::foreign_aid;
-            this->_money += 2;
+            last_act = ActionType::foreign_aid;
+            this->num_of_coin += 2;
+            this->game_name->next_turn();
         }
     }
     void Player::coup(Player &p)
     {
+        if (!p.is_playing())
+        {
+            throw invalid_argument("The player already couped");
+        }
+        if (num_of_coin < MAXTOCOUP)
+        {
+            throw invalid_argument("not enough coin for coup act");
+        }
         if (*this == p)
         {
-            throw invalid_argument("A player can not dismiss himself from the game...");
+            throw invalid_argument("A player can not coup himself");
         }
-        if (!p.is_alive())
-        {
-            throw invalid_argument("The player was eliminated from the game");
-        }
-        if (_money < m_)
-        {
-            throw invalid_argument("The cost of the method is about 7 coins, you do not have enough ...");
-        }
-        is_turn();
-        cout << "Hello coup from Player" << endl;
-        last_action = ActionType::coup;
-        p.set_alive(false);
+        player_turn("coup");
+        this->game_name->next_turn();
+        this->game_name->set_active_player(-1);
+        last_act = ActionType::coup;
+        p.set_playing(false);
+        num_of_coin = num_of_coin - MAXTOCOUP;
     }
     string Player::role()
     {
-        return _card_name;
+        return card_name;
     }
     int Player::coins() const
     {
-        return _money;
+        return num_of_coin;
     }
     string *Player::get_name()
     {
@@ -100,56 +100,61 @@ namespace coup
     }
     string Player::get_card_name()
     {
-        return _card_name;
+        return card_name;
     }
-    bool Player::is_turn()
+    bool Player::player_turn(string const &act_name)
     {
-
-        if (turn_number != (*(_game)).get_turn())
+        (*(game_name)).set_running();
+        if (!(*(game_name)).get_running())
         {
-            cout << "print: Is not your turn " << *this << endl;
-            throw invalid_argument("Is not your turn");
+            throw invalid_argument("start the game first");
         }
-        if (!is_alive())
+        if (this->coins() > MAXCOINSTOCOUP && act_name != "coup")
         {
-            cout << "You're out of the game " << *this << endl;
-            (*(_game)).next_turn();
-            throw invalid_argument("You're out of the game");
+            throw invalid_argument("need to coup");
         }
-        (*(_game)).next_turn();
+        if (turn_num != (*(game_name)).get_turn())
+        {
+            throw invalid_argument("not player turn");
+        }
+        if (!is_playing())
+        {
+            (*(game_name)).next_turn();
+            throw invalid_argument("player out of the game");
+        }
         return true;
     }
-    bool Player::is_alive() const
+    bool Player::is_playing() const
     {
-        return alive;
+        return playing;
     }
-    ActionType Player::last_act()
+    ActionType Player::last_action()
     {
-        return last_action;
+        return this->last_act;
     }
-    Game *Player::game_name()
+    Game *Player::get_game_name()
     {
-        return _game;
+        return game_name;
     }
-    unsigned int Player::turn_num() const
+    unsigned int Player::get_turn_num() const
     {
-        return turn_number;
+        return turn_num;
     }
     void Player::block(Player &p)
     {
-        throw invalid_argument("This player can not perform this action");
+        throw invalid_argument("Probably this player cant preforme block");
     }
     void Player::steal(Player &p)
     {
-        throw invalid_argument("This player can not perform this action");
+        throw invalid_argument("Probably this player cant preforme steal");
     }
     void Player::tax()
     {
-        throw invalid_argument("This player can not perform this action");
+        throw invalid_argument("Probably this player cant preforme tax");
     }
     void Player::transfer(Player &p1, Player &p2)
     {
-        throw invalid_argument("This player can not perform this action");
+        throw invalid_argument("Probably this player cant preforme transfer");
     }
     void Player::set_name(const string &name)
     {
@@ -159,73 +164,28 @@ namespace coup
     {
         return this == &p;
     }
-    void Player::set_money(int m)
+    void Player::set_coins(int m)
     {
-        _money += m;
+        num_of_coin += m;
     }
     Player *Player::stolen_from()
     {
-        throw invalid_argument("This player can not perform this action");
+        throw invalid_argument("Probably this player cant preforme this act");
     }
-    void Player::set_alive(bool Alive)
+    void Player::set_playing(bool die)
     {
-        alive = Alive;
+        playing = die;
     }
-    Player *Player::getAttacked()
+    Player *Player::got_attacked()
     {
-        throw invalid_argument("This player can not perform this action");
+        throw invalid_argument("Probably this player cant preforme attack");
     }
-    ostream &
-    operator<<(std::ostream &out, const Player &p1)
+    ostream &operator<<(std::ostream &out, const Player &p1)
     {
-
-        out << "\033[1;31mName: \033[1;33m" << p1.name + " \033[0;34m" + p1._card_name + "\033[0m";
         return out;
     }
-    string Player::description()
+    int Player::coupcost() const
     {
-
-        string action;
-        switch (last_action)
-        {
-        case ActionType::income:
-            action = "income";
-            break;
-        case ActionType::foreign_aid:
-            action = "foreign_aid";
-            break;
-        case ActionType::tax:
-            action = "tax";
-            break;
-        case ActionType::steal:
-            action = "steal";
-            break;
-        case ActionType::block:
-            action = "block";
-            break;
-        case ActionType::transfer:
-            action = "transfer";
-            break;
-        case ActionType::err:
-            action = "err";
-            break;
-        case ActionType::coup:
-            action = "coup";
-            break;
-        case ActionType::start:
-            action = "start";
-            break;
-        }
-        string doc;
-        string tempAlive = alive?"true":"false";
-        doc += actor_draw;
-        doc += "\033[1;31m| Name: \033[1;33m" + *get_name() + "\n";
-        doc += "\033[1;31m| Role: \033[1;33m" + _card_name + "\n";
-        doc += "\033[1;31m| Coins: \033[1;33m" + to_string(_money) + "\n";
-        doc += "\033[1;31m| Alive: \033[1;33m" + tempAlive + "\n";
-        doc += "\033[1;31m| Last-Action: \033[1;33m" + action + "\n";
-        doc += "\033[1;31m| Turn-Number: \033[1;33m" + to_string(turn_number) + "\n\033[0m";
-        return doc;
+        return coup_cost;
     }
-
 }

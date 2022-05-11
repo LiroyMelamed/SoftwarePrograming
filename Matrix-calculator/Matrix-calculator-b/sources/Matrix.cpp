@@ -24,7 +24,7 @@ namespace zich
 
     Matrix Matrix::operator+(const Matrix &_mat) const
     {
-        check_Matrix_size(_mat, 1);
+        check_matrix_size(_mat, 1);
         vector<double> temp((size_t)(size));
         for (size_t i = 0; i < size; i++)
         {
@@ -35,7 +35,7 @@ namespace zich
 
     Matrix Matrix::operator-(const Matrix &_mat) const
     {
-        check_Matrix_size(_mat, 1);
+        check_matrix_size(_mat, 1);
         vector<double> temp((size_t)(size));
         for (size_t i = 0; i < size; ++i)
         {
@@ -46,7 +46,7 @@ namespace zich
 
     Matrix Matrix::operator*(const Matrix &_mat) const
     {
-        check_Matrix_size(_mat, 2);
+        check_matrix_size(_mat, 2);
         vector<double> temp((size_t)(row * _mat.col));
 
         for (size_t i = 0; i < row; ++i)
@@ -135,7 +135,7 @@ namespace zich
 
     Matrix &Matrix::operator+=(const Matrix &_mat)
     {
-        check_Matrix_size(_mat, 1);
+        check_matrix_size(_mat, 1);
         for (size_t i = 0; i < size; ++i)
         {
             mat[i] += _mat.mat[i];
@@ -145,7 +145,7 @@ namespace zich
 
     Matrix &Matrix::operator-=(const Matrix &_mat)
     {
-        check_Matrix_size(_mat, 1);
+        check_matrix_size(_mat, 1);
         for (size_t i = 0; i < size; ++i)
         {
             mat[i] -= _mat.mat[i];
@@ -155,7 +155,7 @@ namespace zich
 
     Matrix &Matrix::operator*=(const Matrix &_mat)
     {
-        check_Matrix_size(_mat, 2);
+        check_matrix_size(_mat, 2);
         *this = *this * _mat;
         return *this;
     }
@@ -175,7 +175,7 @@ namespace zich
 
     bool Matrix::operator==(const Matrix &_mat) const
     {
-        check_Matrix_size(_mat, 1);
+        check_matrix_size(_mat, 1);
         for (size_t i = 0; i < size; ++i)
         {
             if (mat[i] != _mat.mat[i])
@@ -188,7 +188,7 @@ namespace zich
 
     bool Matrix::operator!=(const Matrix &_mat) const
     {
-        check_Matrix_size(_mat, 1);
+        check_matrix_size(_mat, 1);
         for (size_t i = 0; i < size; ++i)
         {
             if (mat[i] != _mat.mat[i])
@@ -201,25 +201,25 @@ namespace zich
 
     bool Matrix::operator>=(const Matrix &_mat) const
     {
-        check_Matrix_size(_mat, 1);
+        check_matrix_size(_mat, 1);
         return _mat.sum_of_mat() <= this->sum_of_mat();
     }
 
     bool Matrix::operator<=(const Matrix &_mat) const
     {
-        check_Matrix_size(_mat, 1);
+        check_matrix_size(_mat, 1);
         return _mat.sum_of_mat() >= this->sum_of_mat();
     }
 
     bool Matrix::operator<(const Matrix &_mat) const
     {
-        check_Matrix_size(_mat, 1);
+        check_matrix_size(_mat, 1);
         return _mat.sum_of_mat() > this->sum_of_mat();
     }
 
     bool Matrix::operator>(const Matrix &_mat) const
     {
-        check_Matrix_size(_mat, 1);
+        check_matrix_size(_mat, 1);
         return _mat.sum_of_mat() < this->sum_of_mat();
     }
 

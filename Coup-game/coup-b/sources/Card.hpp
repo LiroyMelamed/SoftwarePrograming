@@ -2,10 +2,9 @@
 #define CARD_H
 
 /**
-* @brief card type and action type
-*
-*/
-
+ * @brief card type and action type
+ *
+ */
 
 namespace coup
 {
