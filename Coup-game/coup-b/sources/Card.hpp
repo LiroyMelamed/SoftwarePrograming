@@ -31,6 +31,8 @@ namespace coup
         transfer,
         coup,
         start,
+        out,
+        back,
         err,
     };
 }

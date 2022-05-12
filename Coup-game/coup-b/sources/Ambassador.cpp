@@ -53,7 +53,7 @@ void Ambassador::transfer(Player &p1, Player &p2)
     }
     last_act = ActionType::transfer;
     transfer_from = &p1;
-    transfer_to = &p2;
+    transfer_from = &p2;
     this->game_name->next_turn();
     p1.set_coins(-1);
     p2.set_coins(1);

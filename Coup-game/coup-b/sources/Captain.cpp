@@ -1,7 +1,9 @@
 #include "Captain.hpp"
+
 #include <iostream>
 #include <vector>
 #include <string>
+
 using namespace std;
 using namespace coup;
 
@@ -52,8 +54,8 @@ void Captain::steal(Player &p)
         this->last_act = ActionType::steal;
         this->stolen = &p;
         this->game_name->next_turn();
-        num_of_coin += 2;
-        p.set_coins(-2);
+        num_of_coin += (p.coins() < 2) ? p.coins() : 2;
+        p.set_coins((p.coins() < 2) ? -p.coins() : -2);
     }
 }
 Player *Captain::stolen_from()

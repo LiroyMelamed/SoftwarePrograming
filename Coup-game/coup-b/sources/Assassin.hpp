@@ -1,5 +1,8 @@
 #ifndef ASSASSIN_H
 #define ASSASSIN_H
+
+#define MINTOCOUP 3
+
 #include <iostream>
 #include <vector>
 #include <string>

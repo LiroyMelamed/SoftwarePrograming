@@ -1,6 +1,8 @@
 #include "Contessa.hpp"
+
 #include <vector>
 #include <string>
+
 using namespace std;
 using namespace coup;
 

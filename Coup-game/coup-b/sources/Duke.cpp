@@ -1,6 +1,8 @@
 #include "Duke.hpp"
+
 #include <vector>
 #include <string>
+
 using namespace std;
 using namespace coup;
 
@@ -32,7 +34,7 @@ void Duke::tax()
 {
     last_act = ActionType::err;
     player_turn("tax");
-    this->game_name->next_turn();
     set_coins(3);
     last_act = ActionType::tax;
+    this->game_name->next_turn();
 }

@@ -37,7 +37,7 @@ string Game::winner()
     {
         return p_names[0];
     }
-    return "no winner yet";
+    throw invalid_argument("no winner yet");
 }
 void Game::inc_player_num()
 {
@@ -82,8 +82,5 @@ bool Game::get_running() const
 }
 void Game::set_running()
 {
-    if (active_player > 2)
-    {
-        running = true;
-    }
+    running = (num_of_player > MINPLAYER);
 }

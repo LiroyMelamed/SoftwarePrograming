@@ -12,6 +12,11 @@ namespace coup
     Player::Player(const string &name, int money, CardType role, Game &g)
     {
 
+        if (g.get_running() || g.get_num_of_players() >= MAXPLAYER)
+        {
+            throw invalid_argument("game unavaible");
+        }
+
         this->name = name;
         num_of_coin = money;
         title = role;
@@ -20,11 +25,6 @@ namespace coup
         playing = true;
         turn_num = (*(game_name)).get_num_of_players();
         coup_cost = 0;
-
-        if (g.get_running() || g.get_num_of_players() >= MAXPLAYER)
-        {
-            throw invalid_argument("game unavaible");
-        }
 
         switch (title)
         {
@@ -73,18 +73,18 @@ namespace coup
         }
         if (num_of_coin < MAXTOCOUP)
         {
-            throw invalid_argument("not enough coin for coup act");
+            throw invalid_argument("not enough coin");
         }
         if (*this == p)
         {
-            throw invalid_argument("A player can not coup himself");
+            throw invalid_argument("A player cant coup himself");
         }
         player_turn("coup");
-        this->game_name->next_turn();
-        this->game_name->set_active_player(-1);
         last_act = ActionType::coup;
+        num_of_coin -= MAXTOCOUP;
         p.set_playing(false);
-        num_of_coin = num_of_coin - MAXTOCOUP;
+        this->game_name->set_active_player(-1);
+        this->game_name->next_turn();
     }
     string Player::role()
     {
@@ -130,7 +130,7 @@ namespace coup
     }
     ActionType Player::last_action()
     {
-        return this->last_act;
+        return last_act;
     }
     Game *Player::get_game_name()
     {
@@ -174,6 +174,7 @@ namespace coup
     }
     void Player::set_playing(bool die)
     {
+        last_act = (die) ? ActionType::back : ActionType::out;
         playing = die;
     }
     Player *Player::got_attacked()
