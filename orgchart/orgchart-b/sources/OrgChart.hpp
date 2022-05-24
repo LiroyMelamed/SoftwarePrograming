@@ -4,6 +4,8 @@
 #include <string>
 #include <stack>
 #include <queue>
+#include <list>
+#include <map>
 
 using namespace std;
 
@@ -24,14 +26,14 @@ namespace ariel
     name = _name;
     level_order = level;
    }
-   void print_tree(const std::string &prefix, const Node *node, bool is_left)
+   void print_tree(const std::string &prefix, const Node *node, bool has_son)
    {
     {
      if (node != nullptr)
      {
       std::cout << prefix;
 
-      std::cout << (is_left ? "├──" : "└──");
+      std::cout << (has_son ? "├──" : "└──");
 
       // print the value of the node
       std::cout << node->name << std::endl;
@@ -39,7 +41,7 @@ namespace ariel
       // enter the next tree level - left and right branch
       for (Node *n : node->children)
       {
-       print_tree(prefix + (is_left ? "│   " : "    "), n, true);
+       print_tree(prefix + (has_son ? "│   " : "    "), n, true);
       }
      }
     }
@@ -49,6 +51,7 @@ namespace ariel
   {
   private:
    Node *employe;
+   std::list<Node *> sorted;
 
   public:
    Iterator(int Case, Node *temp = nullptr)
@@ -67,6 +70,8 @@ namespace ariel
       reverse_level_order(temp);
       break;
      }
+     employe = sorted.front();
+     sorted.pop_front();
     }
     else
     {
@@ -76,55 +81,70 @@ namespace ariel
 
    void level_order(Node *ptr = nullptr)
    {
-    queue<Node *> q;
-    q.push(ptr);
-    while (!q.empty())
+    queue<Node *> que;
+    que.push(ptr);
+    while (!que.empty())
     {
-     employe = q.front();
-     q.pop();
+     employe = que.front();
+     que.pop();
+     sorted.push_back(employe);
      for (Node *p : employe->children)
      {
-      q.push(p);
+      que.push(p);
      }
     }
    }
    void pre_order(Node *ptr = nullptr)
    {
-    stack<Node *> Stack;
-    Stack.push(ptr);
-    while (!Stack.empty())
+    stack<Node *> temp;
+    temp.push(ptr);
+    while (!temp.empty())
     {
-     employe = Stack.top();
-     Stack.pop();
+     employe = temp.top();
+     temp.pop();
+     sorted.push_back(employe);
      for (unsigned int i = employe->children.size(); i > 0; i--)
      {
-      Stack.push(employe->children[i - 1]);
+      temp.push(employe->children[i - 1]);
      }
     }
    }
    void reverse_level_order(Node *ptr = nullptr)
    {
-    queue<Node *> q;
-    q.push(ptr);
-    while (!q.empty())
+    map<int, vector<Node *>> temp_employee;
+    queue<Node *> que;
+    que.push(ptr);
+    while (!que.empty())
     {
-     employe = q.front();
-     q.pop();
+     employe = que.front();
+     que.pop();
+     temp_employee[employe->level_order].push_back(employe);
      for (auto *p : employe->children)
      {
-      q.push(p);
+      que.push(p);
+     }
+    }
+
+    for (size_t index = temp_employee.size(); index > 0; index--)
+    {
+     for (auto *node : temp_employee[index - 1])
+     {
+      sorted.push_back(node);
      }
     }
    }
 
-   string &operator*() const { return employe->name; }
+   string &operator*() const
+   {
+    return employe->name;
+   }
    /**
     * Overloading operator->
     * @return string name.
     */
    string *operator->() const
    {
-    return &(employe->name);
+    return &employe->name;
    }
    /**
     * Overloading operator++
@@ -132,6 +152,15 @@ namespace ariel
     */
    Iterator &operator++()
    {
+    if (!sorted.empty())
+    {
+     employe = sorted.front();
+     sorted.pop_front();
+    }
+    else
+    {
+     employe = nullptr;
+    }
     return *this;
    }
 
@@ -141,24 +170,24 @@ namespace ariel
     */
    Iterator operator++(int)
    {
-    Iterator tmp = *this;
-    return tmp;
+    Iterator temp = *this;
+    return temp;
    }
    /**
     * Overloading operator==
     * @return bool .
     */
-   bool operator==(const Iterator &rhs) const
+   bool operator==(const Iterator &ite) const
    {
-    return employe == rhs.employe;
+    return employe == ite.employe;
    }
    /**
     * Overloading operator!=
     * @return bool .
     */
-   bool operator!=(const Iterator &rhs) const
+   bool operator!=(const Iterator &ite) const
    {
-    return employe != rhs.employe;
+    return employe != ite.employe;
    }
   };
 
@@ -223,7 +252,7 @@ namespace ariel
    */
   friend std::ostream &operator<<(std::ostream &, const OrgChart &);
 
-  void add_child(Node *, string, Node *);
+  void add_child(Node *, const string &, const string &);
 
   Node &get_root();
  };

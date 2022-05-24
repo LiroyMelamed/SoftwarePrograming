@@ -9,6 +9,10 @@ namespace ariel
 
   OrgChart OrgChart::add_root(const string &_name)
   {
+    if (_name.empty())
+    {
+      throw invalid_argument("at least one char");
+    }
     if (root == nullptr)
     {
       root = new Node(_name, 0);
@@ -24,49 +28,85 @@ namespace ariel
 
   OrgChart OrgChart::add_sub(const string &parent, const string &child)
   {
+    if (parent.empty() || child.empty())
+    {
+      throw invalid_argument("at least one char");
+    }
     if (root == nullptr)
     {
       throw invalid_argument("create Organzation first");
     }
-    else
+    int check = employe_num;
+    add_child(root, parent, child);
+    if (check == employe_num)
     {
-      Node *new_Child = new Node(child, 0);
-      add_child(root, parent, new_Child);
+      throw invalid_argument("cant find employee");
     }
-    employe_num++;
     return *this;
   }
   OrgChart::Iterator OrgChart::begin_level_order()
   {
+    if (root == nullptr)
+    {
+      throw invalid_argument("chart is empty!");
+    }
     return Iterator{1, root};
   }
   OrgChart::Iterator OrgChart::end_level_order()
   {
-    return Iterator{1, root};
+    if (root == nullptr)
+    {
+      throw invalid_argument("chart is empty!");
+    }
+    return Iterator{1, nullptr};
   }
   OrgChart::Iterator OrgChart::begin_reverse_order()
   {
+    if (root == nullptr)
+    {
+      throw invalid_argument("chart is empty!");
+    }
     return Iterator{3, root};
   }
   OrgChart::Iterator OrgChart::reverse_order()
   {
-    return Iterator{3, root};
+    if (root == nullptr)
+    {
+      throw invalid_argument("chart is empty!");
+    }
+    return Iterator{3, nullptr};
   }
   OrgChart::Iterator OrgChart::end_preorder()
   {
-    return Iterator{2, root};
+    if (root == nullptr)
+    {
+      throw invalid_argument("chart is empty!");
+    }
+    return Iterator{2, nullptr};
   }
   OrgChart::Iterator OrgChart::begin_preorder()
   {
+    if (root == nullptr)
+    {
+      throw invalid_argument("chart is empty!");
+    }
     return Iterator{2, root};
   }
   OrgChart::Iterator OrgChart::begin()
   {
+    if (root == nullptr)
+    {
+      throw invalid_argument("chart is empty!");
+    }
     return Iterator{1, root};
   }
   OrgChart::Iterator OrgChart::end()
   {
-    return Iterator{1, root};
+    if (root == nullptr)
+    {
+      throw invalid_argument("chart is empty!");
+    }
+    return Iterator{1, nullptr};
   }
 
   std::ostream &operator<<(ostream &out, const OrgChart &p1)
@@ -75,29 +115,20 @@ namespace ariel
     return out;
   }
 
-  void OrgChart::add_child(Node *temp_root, string parent, Node *new_child)
+  void OrgChart::add_child(Node *temp_root, const string &parent, const string &child)
   {
     if (temp_root->name == parent)
     {
-      new_child->level_order = temp_root->level_order + 1;
-      for (Node *n : temp_root->children)
-      {
-        if (n->name == new_child->name)
-        {
-          throw invalid_argument("Employee exist");
-        }
-      }
+      Node *new_child = new Node(child, temp_root->level_order + 1);
       temp_root->children.push_back(new_child);
+      employe_num++;
     }
     else
     {
-      int l = temp_root->children.size();
+      unsigned int l = temp_root->children.size();
       for (unsigned int i = 0; i < l; i++)
       {
-        if (temp_root->children[i]->name == parent)
-          add_child(temp_root->children[i], parent, new_child);
-        else
-          add_child(temp_root->children[i], parent, new_child);
+        add_child(temp_root->children[i], parent, child);
       }
     }
     // else
